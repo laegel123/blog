@@ -1,7 +1,7 @@
 ---
 title: "Introducing Shiori: A Bootstrap-Based Jekyll Theme"
 ---
-안녕하세요 한글 테스트
+
 ![Shiori](https://cloud.githubusercontent.com/assets/992008/3955483/2b9a77ae-2702-11e4-9f28-6afb051271de.png)
 
 ## Introduction
