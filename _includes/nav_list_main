@@ -9,13 +9,21 @@
       </li>
       <li>
         <span class="nav__sub-title">Spring</span>
-            <ul>
-                {% for category in site.categories %}
-                    {% if category[0] == "Spring Security" %}
-                        <li><a href="/blog/categories/spring-security" class="">Spring Security ({{category[1].size}})</a></li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
+        <ul>
+            {% for category in site.categories %}
+                {% if category[0] == "Spring Security" %}
+                    <li><a href="/blog/categories/spring-security" class="">Spring Security ({{category[1].size}})</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        <span class="nav__sub-title">Java</span>
+        <ul>
+            {% for category in site.categories %}
+                {% if category[0] == "Java" %}
+                    <li><a href="/blog/categories/java-jvm" class="">JVM ({{category[1].size}})</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
 
 
       </li>
