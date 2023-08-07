@@ -4,7 +4,7 @@
         xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     
     <url>
-        <loc>http://localhost:4000/java/ch1/</loc>
+        <loc>http://localhost:4000/java/jvm/ch1/</loc>
         
         <lastmod>2023-08-07T00:00:00+09:00</lastmod>
         
@@ -20,7 +20,7 @@
     </url>
     
     <url>
-        <loc>http://localhost:4000/java/ch0/</loc>
+        <loc>http://localhost:4000/java/jvm/ch0/</loc>
         
         <lastmod>2023-07-31T00:00:00+09:00</lastmod>
         
