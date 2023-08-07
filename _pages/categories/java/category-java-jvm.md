@@ -1,5 +1,5 @@
 ---
-title: "JVM"
+title: "JVM1"
 layout: archive
 permalink: categories/java-jvm
 author_profile: true
