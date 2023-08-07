@@ -19,7 +19,7 @@
         <span class="nav__sub-title">Java</span>
         <ul>
             {% for category in site.categories %}
-                {% if category[0] == "Java" %}
+                {% if category[0] == "JVM" %}
                     <li><a href="/blog/categories/java-jvm" class="">JVM ({{category[1].size}})</a></li>
                 {% endif %}
             {% endfor %}
