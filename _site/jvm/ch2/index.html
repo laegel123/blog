@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/font-iropke-batang/1.2/font-iropke-batang.css">
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>[JVM] JVM 총정리 - 실행 엔진(2) - diary</title>
+<!-- begin _includes/seo.html --><title>[JVM] JVM 총정리 - 실행 엔진(3) - diary</title>
 <meta name="description" content="실행 엔진은 Runtime Data Area 에 적재된 바이트코드들을 실행하고 사용되지 않는 데이터들을 제거하는 역할을 하며 세 가지 장치로 구분된다.    인터프리터(Interpreter)   JIT Compiler   Garbage Collector">
 
 
@@ -29,7 +29,7 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="diary">
-<meta property="og:title" content="[JVM] JVM 총정리 - 실행 엔진(2)">
+<meta property="og:title" content="[JVM] JVM 총정리 - 실행 엔진(3)">
 <meta property="og:url" content="http://localhost:4000/jvm/ch2/">
 
 
@@ -308,7 +308,7 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="[JVM] JVM 총정리 - 실행 엔진(2)">
+    <meta itemprop="headline" content="[JVM] JVM 총정리 - 실행 엔진(3)">
     <meta itemprop="description" content="실행 엔진은 Runtime Data Area 에 적재된 바이트코드들을 실행하고 사용되지 않는 데이터들을 제거하는 역할을 하며 세 가지 장치로 구분된다.  인터프리터(Interpreter)  JIT Compiler  Garbage Collector">
     <meta itemprop="datePublished" content="2023-08-07T00:00:00+09:00">
     <meta itemprop="dateModified" content="2023-08-07T00:00:00+09:00">
@@ -317,7 +317,7 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/jvm/ch2/" class="u-url" itemprop="url">[JVM] JVM 총정리 - 실행 엔진(2)
+            <a href="http://localhost:4000/jvm/ch2/" class="u-url" itemprop="url">[JVM] JVM 총정리 - 실행 엔진(3)
 </a>
           </h1>
           
@@ -349,12 +349,12 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
-              <ul class="toc__menu"><li><a href="#인터프리터interpreter">인터프리터(Interpreter)</a></li><li><a href="#jit-compilerjust-in-time">JIT Compiler(Just In Time)</a></li><li><a href="#garbage-collector">Garbage Collector</a><ul><li><a href="#minor-gc">Minor GC</a></li><li><a href="#major-gc또는-full-gc">Major GC(또는 Full GC)</a></li></ul></li><li><a href="#gc의-특징">GC의 특징</a><ul><li><a href="#stop-the-world">Stop the World</a></li><li><a href="#mark-and-sweep">Mark and Sweep</a></li></ul></li><li><a href="#gc의-다양한-알고리즘">GC의 다양한 알고리즘</a><ul><li><a href="#serial-collector">Serial Collector</a></li><li><a href="#parallel-collector">Parallel Collector</a></li><li><a href="#concurrent-mark-sweep-cms">Concurrent Mark-Sweep (CMS)</a></li><li><a href="#garbage-first-garbage-collector-g1gc">Garbage-First Garbage Collector (G1GC)</a><ul><li><a href="#minor-gc-1">Minor GC</a></li><li><a href="#major-gc-full-gc">Major GC (Full GC)</a></li></ul></li></ul></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#인터프리터interpreter">인터프리터(Interpreter)</a></li><li><a href="#jit-compilerjust-in-time">JIT Compiler(Just In Time)</a></li><li><a href="#garbage-collector">Garbage Collector</a><ul><li><a href="#gc-의-동작-방식">GC 의 동작 방식</a><ul><li><a href="#minor-gc">Minor GC</a></li><li><a href="#major-gc또는-full-gc">Major GC(또는 Full GC)</a></li></ul></li><li><a href="#gc의-특징">GC의 특징</a><ul><li><a href="#stop-the-world">Stop the World</a></li><li><a href="#mark-and-sweep">Mark and Sweep</a></li></ul></li><li><a href="#gc의-다양한-알고리즘">GC의 다양한 알고리즘</a><ul><li><a href="#serial-collector">Serial Collector</a></li><li><a href="#parallel-collector">Parallel Collector</a></li><li><a href="#concurrent-mark-sweep-cms">Concurrent Mark-Sweep (CMS)</a></li><li><a href="#garbage-first-garbage-collector-g1gc">Garbage-First Garbage Collector (G1GC)</a><ul><li><a href="#minor-gc-1">Minor GC</a></li><li><a href="#major-gc-full-gc">Major GC (Full GC)</a></li></ul></li></ul></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <p>실행 엔진은 Runtime Data Area 에 적재된 바이트코드들을 실행하고 사용되지 않는 데이터들을 제거하는 역할을 하며 세 가지 장치로 구분된다.</p>
+        <p><code class="language-plaintext highlighter-rouge">실행 엔진</code>은 Runtime Data Area 에 적재된 바이트코드들을 실행하고 사용되지 않는 데이터들을 제거하는 역할을 하며 세 가지 장치로 구분된다.</p>
 <ul>
   <li>인터프리터(Interpreter)</li>
   <li>JIT Compiler</li>
@@ -366,7 +366,7 @@
 비효율적이라는 단점이 있다. 이러한 인터프리터 방식의 단점을 보완하기 위해 자바는 1.2 버전부터 뒤이어 설명할 JIT Compiler 를 출시하고 지속적으로 업데이트하면서 속도의 많은 부분이 개선되었다.</p>
 
 <h2 id="jit-compilerjust-in-time">JIT Compiler(Just In Time)</h2>
-<p>앞서 설명한 인터프리터 방식의 속도 문제를 해결하기 위해 디자인 된 기능이다. JIT Compiler 는 이 자주 실행되는 기준을 ‘컴파일 임계치’ 라는 개념의 단위로 판단한다.<br />
+<p>앞서 설명한 인터프리터 방식의 속도 문제를 해결하기 위해 디자인 된 기능이다. JIT Compiler 는 이 자주 실행되는 기준을 ‘<strong>컴파일 임계치</strong>’ 라는 개념의 단위로 판단한다.<br />
 컴파일 임계치를 구하는 방법은 다음과 같다.</p>
 <ul>
   <li>method entry counter: JVM 내에 있는 메서드가 호출된 횟수</li>
@@ -381,7 +381,7 @@
 <p>프로그램이 실행되다 보면 유효하지 않은 메모리인 가비지가 발생하게 되는데 이러한 불필요한 객체들(unreachable objects)을 분별해내고 정리해주는 것이 JVM의 Garbage Collector 이다. GC가 시작되면 JVM은 GC를 실행하는 쓰레드를 제외한 
 모든 쓰레드들의 작업이 중단된다. 이러한 특징으로 인해 GC 실행 시간을 줄이고자 다양한 알고리즘이 등장하였다.</p>
 
-<p>### GC 의 동작 방식</p>
+<h3 id="gc-의-동작-방식">GC 의 동작 방식</h3>
 
 <p>GC 의 대상이 되는 영역인 Heap Area 는 다음과 같은 구조로 이루어져 있다.
  <img src="../../assets/img/java/jvm08.png" />
@@ -390,17 +390,17 @@
 <p>크게 Yong 영역과 Old 영역으로 이루어져 있으며, Yong 영역은 1개의 Eden 영역, 2개의 Survivor 영역으로 나뉘어져 있다.</p>
 
 <p>GC 는 Yong 영역과 Old 영역에서 일어나는 GC 작업을 구분하여 진행한다. <br />
-Yong 영역에서 일어나는 GC 를 <em>Minor GC</em>라 하고, Old 영역에서 일어나는 GC를 <em>Major GC</em> 또는 <em>Full GC</em>라고 한다.</p>
+Yong 영역에서 일어나는 GC 를 <code class="language-plaintext highlighter-rouge">Minor GC</code>라 하고, Old 영역에서 일어나는 GC를 <code class="language-plaintext highlighter-rouge">Major GC</code> 또는 <code class="language-plaintext highlighter-rouge">Full GC</code>라고 한다.</p>
 
 <h4 id="minor-gc">Minor GC</h4>
-<p>Heap Area의 Yong 영역에서 일어나는 GC를 <em>Minor GC</em>라 부른다. Yong 영역은 새롭게 생성되는 객체가 Allocation(할당)되는 영역이다. 대부분의 객체가 이 영역에서 금방 접근 불가능한 상태(Unreachable)가 되기 때문에, 많은 객체가 Yong 영역에서 GC의 
+<p>Heap Area의 Yong 영역에서 일어나는 GC를 <code class="language-plaintext highlighter-rouge">Minor GC</code>라 부른다. Yong 영역은 새롭게 생성되는 객체가 Allocation(할당)되는 영역이다. 대부분의 객체가 이 영역에서 금방 접근 불가능한 상태(Unreachable)가 되기 때문에, 많은 객체가 Yong 영역에서 GC의 
 대상이 되어 제거된다. Minor GC가 실행되면 참조되고 있는 객체들을 제외한 나머지 객체들은 제거되게 된다.</p>
 
 <p>Minor GC 가 진행되는 세부 과정은 다음과 같다.
 <img src="../../assets/img/java/jvm09.png" /></p>
 
 <ol>
-  <li>새로 생성된 객체가 <em>Eden 영역</em>에 할당된다.</li>
+  <li>새로 생성된 객체가 <code class="language-plaintext highlighter-rouge">Eden 영역</code>에 할당된다.</li>
   <li>객체가 계속 생성되다가 Eden 영역이 가득 차게 되면 Minor GC가 실행된다.</li>
   <li>참조되지 않는 객체들은 제거되고 살아남은 객체들은 Survivor1 영역으로 복사된다.</li>
   <li>이후 Survivor1 영역이 가득차게 되거나 Eden 영역이 가득 차게되면 GC 작업 수행 이후 살아남은 객체들이 Survivor2 영역으로 복사된다.</li>
@@ -413,7 +413,7 @@ Yong 영역에서 일어나는 GC 를 <em>Minor GC</em>라 하고, Old 영역에
 또한 각 Object 마다 Object Header 에 Minor GC 에서 살아남은 횟수를 의미하는 age 가 기록되어 있는데, 이 값이 다음 Minor GC 에서 Promotion(이동) 여부를 결정하는 변수가 된다.</p>
 
 <h4 id="major-gc또는-full-gc">Major GC(또는 Full GC)</h4>
-<p><em>Major GC</em>는 Old 영역에서 일어나는 GC를 말한다. Old 영역은 Yong 영역에서 Reachable 상태를 유지하며 살아남은 객체들이 복사되는 영역으로, Yong 영역보다 훨씬 크게 할당된다. Old 영역 자체의 크기도 크고 대부분의 객체들이 Yong 영역에서 GC의 
+<p><code class="language-plaintext highlighter-rouge">Major GC</code>는 Old 영역에서 일어나는 GC를 말한다. Old 영역은 Yong 영역에서 Reachable 상태를 유지하며 살아남은 객체들이 복사되는 영역으로, Yong 영역보다 훨씬 크게 할당된다. Old 영역 자체의 크기도 크고 대부분의 객체들이 Yong 영역에서 GC의 
  대상이 되어 Major GC는 비교적 자주 발생하지는 않지만, 한 번 발생하면 그 시간은 Minor GC보다 훨씬 오래 걸린다. 그래서 GC에 대한 튜닝을 진행할 때는 보통 Major GC의 성능을 높이는 경우가 많다.</p>
 
 <h3 id="gc의-특징">GC의 특징</h3>
@@ -424,18 +424,18 @@ Yong 영역에서 일어나는 GC 를 <em>Minor GC</em>라 하고, Old 영역에
 </ul>
 
 <h4 id="stop-the-world">Stop the World</h4>
-<p><em>Stop the World</em>는 JVM이 GC를 실행하기 위해 애플리케이션 실행을 잠시 멈추는 작업이다. GC가 실행될 때는 GC를 실행하는 thread를 제외한 모든 thread들의 작업이 중단되고, GC가 완료되면 작업이 재개된다.</p>
+<p><code class="language-plaintext highlighter-rouge">Stop the World</code>는 JVM이 GC를 실행하기 위해 애플리케이션 실행을 잠시 멈추는 작업이다. GC가 실행될 때는 GC를 실행하는 thread를 제외한 모든 thread들의 작업이 중단되고, GC가 완료되면 작업이 재개된다.</p>
 
 <h4 id="mark-and-sweep">Mark and Sweep</h4>
-<p><em>Stop the World</em>를 통해 모든 작업이 중단되면, GC는 스택의 모든 변수 또는 reachable 객체를 스캔하면서 각각 어떤 객체를 참조하고 있는지 탐색한다. 그리고 사용되고 있는 객체들을 식별하는데, 이 과정을 <em>Mark</em> 라고 한다. 이후에 Mark 되지 않는 
-객체들을 메모리에서 제거하는 과정을 Sweep 이라고 한다.</p>
+<p><code class="language-plaintext highlighter-rouge">Stop the World</code>를 통해 모든 작업이 중단되면, GC는 스택의 모든 변수 또는 reachable 객체를 스캔하면서 각각 어떤 객체를 참조하고 있는지 탐색한다. 그리고 사용되고 있는 객체들을 식별하는데, 이 과정을 ‘<strong>Mark</strong>’ 라고 한다. 이후에 Mark 되지 않는 
+객체들을 메모리에서 제거하는 과정을 ‘<strong>Sweep</strong>’ 이라고 한다.</p>
 
 <h3 id="gc의-다양한-알고리즘">GC의 다양한 알고리즘</h3>
 <p>GC에는 많은 알고리즘이 있지만 그 중 대표되는 알고리즘 몇 개를 소개하겠다.</p>
 
 <h4 id="serial-collector">Serial Collector</h4>
-<p><em>Serial Collector</em>는 싱글 스레드로 모든 종류의 GC를 수행하는 고전적 방식의 Garbage Collector 이다. 이 방식은 싱글 프로세서 시스템에 가장 적합하다.
- 1 개의 thread 만을 이용해 모든 GC 일을 처리하기 때문에 CPU 코더가 여러 개인 운영서버에서 <em>Serial Collector</em>를 사용하는 것은 반드시 피해야 한다.</p>
+<p><code class="language-plaintext highlighter-rouge">Serial Collector</code>는 싱글 스레드로 모든 종류의 GC를 수행하는 고전적 방식의 Garbage Collector 이다. 이 방식은 싱글 프로세서 시스템에 가장 적합하다.
+ 1 개의 thread 만을 이용해 모든 GC 일을 처리하기 때문에 CPU 코더가 여러 개인 운영서버에서 <code class="language-plaintext highlighter-rouge">Serial Collector</code>를 사용하는 것은 반드시 피해야 한다.</p>
 
 <ul>
   <li>Yong 영역 알고리즘: Serial</li>
@@ -443,8 +443,8 @@ Yong 영역에서 일어나는 GC 를 <em>Minor GC</em>라 하고, Old 영역에
 </ul>
 
 <h4 id="parallel-collector">Parallel Collector</h4>
-<p>멀티 프로세서나 멀티 스레드 하드웨어에서 돌아가는 중대형 규모의 데이터셋을 다루는 애플리케이션을 위한 GC 방식이다. <em>Parallel Collector</em>의 목표는 다른 CPU가 GC의 진행시간 동안 대기 상태로 남아있는 것을 최소화하는 것이다. 이를 위해
-<em>Parallel Collector</em>는 Minor GC를 병렬로 수행하게 하여 GC의 오버헤드를 현저하게 줄이고 성능을 향상시키게 한다. <em>Parallel Collector</em>는 GC의 오버헤드를 상당히 줄여주어 Java 8 버전까지 기본 Garbage Collector 로 사용되었다. 그러나 
+<p>멀티 프로세서나 멀티 스레드 하드웨어에서 돌아가는 중대형 규모의 데이터셋을 다루는 애플리케이션을 위한 GC 방식이다. <code class="language-plaintext highlighter-rouge">Parallel Collector</code>의 목표는 다른 CPU가 GC의 진행시간 동안 대기 상태로 남아있는 것을 최소화하는 것이다. 이를 위해
+<code class="language-plaintext highlighter-rouge">Parallel Collector</code>는 Minor GC를 병렬로 수행하게 하여 GC의 오버헤드를 현저하게 줄이고 성능을 향상시키게 한다. <code class="language-plaintext highlighter-rouge">Parallel Collector</code>는 GC의 오버헤드를 상당히 줄여주어 Java 8 버전까지 기본 Garbage Collector 로 사용되었다. 그러나 
 애플리케이션이 멈추는 고질적인 현상은 지속되어 이후에 개발된 알고리즘이 사용되게 된다.</p>
 
 <ul>
@@ -453,20 +453,20 @@ Yong 영역에서 일어나는 GC 를 <em>Minor GC</em>라 하고, Old 영역에
 </ul>
 
 <h4 id="concurrent-mark-sweep-cms">Concurrent Mark-Sweep (CMS)</h4>
-<p><em>CMS Collector</em> 는 애플리케이션이 일시 정지되는 이슈에 매우 민감할 때 사용되는 방식이다. 예컨대 힙 메모리의 크기가 클 때 이 방식을 사용한다.<br />
+<p><code class="language-plaintext highlighter-rouge">CMS Collector</code> 는 애플리케이션이 일시 정지되는 이슈에 매우 민감할 때 사용되는 방식이다. 예컨대 힙 메모리의 크기가 클 때 이 방식을 사용한다.<br />
 이 방식은 프로세서 리소스를 GC와 공유하는 방식으로, 자원이 GC를 위해 사용하기 때문에 응답이 느려지지만 애플리케이션이 멈추지는 않게 된다. 그러나 CMS는 다른 GC 방식보다 메모리와 CPU를 많이 필요로해 여러 문제점들이 있었고 결국 Java 9 버전
 부터 deprecated 되었다.</p>
 
 <h4 id="garbage-first-garbage-collector-g1gc">Garbage-First Garbage Collector (G1GC)</h4>
-<p><em>G1GC</em>는 장기적으로 많은 문제를 일으킬 수 있는 <em>CMS GC</em>를 대체하기 위해 개발되었고, Java 7 버전부터 지원되기 시작했다. 이 방식은 Yong 영역과 Old 영역으로 나누는 방식을 사용하지 않고 전체 Heap을 1MB 단위의 region(리전)들로 균등하게 나누고 
+<p><code class="language-plaintext highlighter-rouge">G1GC</code>는 장기적으로 많은 문제를 일으킬 수 있는 <code class="language-plaintext highlighter-rouge">CMS GC</code>를 대체하기 위해 개발되었고, Java 7 버전부터 지원되기 시작했다. 이 방식은 Yong 영역과 Old 영역으로 나누는 방식을 사용하지 않고 전체 Heap을 1MB 단위의 region(리전)들로 균등하게 나누고 
 각 지역들을 역할과 함께 논리적으로 구분하여 객체를 할당하는 방식이다.<br />
- <em>G1GC</em>에서는 기존 Eden, Survivor, Old 역할에 더해 Humongous 와 Available/Unused 라는 두 가지 역할이 추가되었다.</p>
+ <code class="language-plaintext highlighter-rouge">G1GC</code>에서는 기존 Eden, Survivor, Old 역할에 더해 Humongous 와 Available/Unused 라는 두 가지 역할이 추가되었다.</p>
 <ul>
   <li>Humongous: region 크기가 50%를 초과하는 객체를 저장하는 region 을 의미gksek.</li>
   <li>Available/Unused: 사용되지 않는 region을 의미한다.</li>
 </ul>
 
-<p><em>G1GC</em>의 핵심은 Heap 을 동일한 크기의 region 으로 나누고, 새로 추가된 역할을 참고하여 가비지가 많은 region 을 우선적으로 GC 작업을 수행하는 것이다.
+<p><code class="language-plaintext highlighter-rouge">G1GC</code>의 핵심은 Heap 을 동일한 크기의 region 으로 나누고, 새로 추가된 역할을 참고하여 가비지가 많은 region 을 우선적으로 GC 작업을 수행하는 것이다.
  <img src="../../assets/img/java/jvm10.png" /></p>
 
 <h5 id="minor-gc-1">Minor GC</h5>
@@ -532,7 +532,7 @@ Yong 영역에서 일어나는 GC 를 <em>Minor GC</em>라 하고, Old 영역에
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%5BJVM%5D+JVM+%EC%B4%9D%EC%A0%95%EB%A6%AC+-+%EC%8B%A4%ED%96%89+%EC%97%94%EC%A7%84%282%29%20http%3A%2F%2Flocalhost%3A4000%2Fjvm%2Fch2%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%5BJVM%5D+JVM+%EC%B4%9D%EC%A0%95%EB%A6%AC+-+%EC%8B%A4%ED%96%89+%EC%97%94%EC%A7%84%283%29%20http%3A%2F%2Flocalhost%3A4000%2Fjvm%2Fch2%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fjvm%2Fch2%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 

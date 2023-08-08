@@ -17,7 +17,7 @@ var store = [{
         "url": "/jvm/ch1/",
         "teaser": null
       },{
-        "title": "[JVM] JVM 총정리 - 실행 엔진(2)",
+        "title": "[JVM] JVM 총정리 - 실행 엔진(3)",
         "excerpt":"실행 엔진은 Runtime Data Area 에 적재된 바이트코드들을 실행하고 사용되지 않는 데이터들을 제거하는 역할을 하며 세 가지 장치로 구분된다. 인터프리터(Interpreter) JIT Compiler Garbage Collector 인터프리터(Interpreter) JVM 인터프리터는 런타임 환경에서 바이트코드를 한 라인씩 읽고 Native Code 로 변환하는 작업을 수행한다. 한 줄씩 기계어로 번역하는 만큼 번역속도는 빠르지만 전체 실행속도는 느리다. 또한...","categories": ["JVM"],
         "tags": ["Java","JVM"],
         "url": "/jvm/ch2/",
