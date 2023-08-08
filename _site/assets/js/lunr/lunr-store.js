@@ -22,4 +22,10 @@ var store = [{
         "tags": ["Java","JVM"],
         "url": "/jvm/ch2/",
         "teaser": null
+      },{
+        "title": "[Java] 리플렉션(Reflection) 알아보기",
+        "excerpt":"리플렉션(Reflection) 이란 ? 리플렉션 은 구체적인 클래스 타입을 알지 못하더라도 그 클래스의 메서드, 타입, 변수들에 접근할 수 있도록 도와주는 자바 API를 말한다. 이 프로그래밍 기법은 런타임 시점에 동적으로 특정 클래스의 정보를 추출할 수 있게 도와줘 프로그램에 유연성을 더해준다. 다만, 런타임 시점에 인스턴스를 생성하기 때문에 구체적인 동작 흐름을 파악하기 어려울 수...","categories": ["Reflection"],
+        "tags": ["Java","Reflection"],
+        "url": "/reflection/ch0/",
+        "teaser": null
       }]
