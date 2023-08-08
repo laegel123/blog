@@ -28,4 +28,10 @@ var store = [{
         "tags": ["Java","Reflection"],
         "url": "/reflection/ch0/",
         "teaser": null
+      },{
+        "title": "[Spring Security] Spring Security + JWT 구현",
+        "excerpt":"개인 프로젝트 진행을 위해 세팅한 환경 일부를 기록한 글이다. JWT(JSON Web Token) 란 ? JWT 란 JSON 객체를 사용해서 토큰 자체에 정보를 저장하는 Web Token 이다. Header, Payload, Signature 3 개의 부분으로 구성되어 있으며, 쿠키나 세션을 이용한 인증보다 안전하고 효율적이다. 다만, 서버에서 관리하지 않다보니 탈취당한 경우 대처가 어려운 단점이 존재한다....","categories": ["Spring Security"],
+        "tags": ["Spring Security"],
+        "url": "/spring%20security/ch0/",
+        "teaser": null
       }]
