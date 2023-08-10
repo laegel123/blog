@@ -105,7 +105,7 @@ analytics:
 # Site Author
 author:
   name             : "laegel"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/img/logo/android-chrome-192x192.png"
   bio              : "반갑습니다. :)"
   location         : "Seoul of Republic Korea"
   email            :

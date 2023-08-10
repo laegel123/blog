@@ -1,21 +1,379 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-08-10T12:09:51+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">diary</title><subtitle>devlogs</subtitle><author><name>laegel</name></author><entry><title type="html">[Java] 리플렉션(Reflection) 알아보기</title><link href="http://localhost:4000/reflection/ch0/" rel="alternate" type="text/html" title="[Java] 리플렉션(Reflection) 알아보기" /><published>2023-08-08T00:00:00+09:00</published><updated>2023-08-08T00:00:00+09:00</updated><id>http://localhost:4000/reflection/ch0</id><content type="html" xml:base="http://localhost:4000/reflection/ch0/"><![CDATA[<h2 id="리플렉션reflection-이란-">리플렉션(Reflection) 이란 ?</h2>
-<p><code class="language-plaintext highlighter-rouge">리플렉션</code> 은 구체적인 클래스 타입을 알지 못하더라도 그 클래스의 메서드, 타입, 변수들에 접근할 수 있도록 도와주는 자바 API를 말한다. 이 프로그래밍 기법은 런타임 시점에 동적으로 특정 클래스의 정보를 추출할 수 있게 도와줘 프로그램에 유연성을 
-더해준다. 다만, 런타임 시점에 인스턴스를 생성하기 때문에 구체적인 동작 흐름을 파악하기 어려울 수 있다.</p>
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <!--폰트 : "Nanum Gothic Coding", "Coming Soon"-->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Coming+Soon&family=Nanum+Gothic+Coding&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Coming+Soon&family=Nanum+Gothic+Coding&display=swap">
 
-<p>일반적으로 리플렉션은 다음과 같은 방식으로 클래스 정보를 얻어올 수 있다.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Class</span> <span class="n">obj</span> <span class="o">=</span> <span class="nc">Car</span><span class="o">.</span><span class="na">class</span><span class="o">;</span>
-<span class="nc">Class</span> <span class="n">obj</span> <span class="o">=</span> <span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"Car"</span><span class="o">);</span>
-</code></pre></div></div>
+    <!--폰트 : "Iropke Batang"-->
+    <link rel="preload" as="style" href="https://cdn.jsdelivr.net/font-iropke-batang/1.2/font-iropke-batang.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/font-iropke-batang/1.2/font-iropke-batang.css">
+    <meta charset="utf-8">
 
-<h2 id="리플렉션의-활용">리플렉션의 활용</h2>
-<p>보통의 경우 개발자가 위와 같은 방식으로 <code class="language-plaintext highlighter-rouge">리플렉션</code> 을 활용하는 경우는 거의 없다. 이 자바 API는 Framework 나 라이브러리, IDE 소프트웨어에서 많이 사용된다.<br />
-프레임워크나 라이브러리는 개발자가 나중에 어떤 타입의 클래스를 만들지 예측할 수 없기 때문에, 런타임 환경에서 사용자가 넘겨준 클래스의 정보를 분석해 동작할 수 있도록 이 리플렉션을 사용한다. 실제로 IDE의 자동완성이나 Hibernate 등 많은 
-프레임워크나 라이브러리에서 리플렉션을 이용하고 있다.</p>
+<!-- begin _includes/seo.html --><title>[Spring Security] Spring Security + JWT 구현 - diary</title>
+<meta name="description" content="개인 프로젝트 진행을 위해 세팅한 환경 일부를 기록한 글이다.">
 
-<p><strong>Spring Framework</strong> 에서는 대표적으로 Spring Container 의 BeanFactory 가 리플렉션 API 를 사용한다.<br />
-스프링에 등록된 Bean 은 애플리케이션이 실행된 후 런타임 시점에 객체가 호출될 때 동적으로 객체의 인스턴스를 생성하는데 이 때 리플렉션 API 를 사용해 해결한다.</p>
 
-<p><a href="#" class="btn btn--primary align-right">맨 위로 이동하기</a></p>]]></content><author><name>laegel</name></author><category term="Reflection" /><category term="Java" /><category term="Reflection" /><summary type="html"><![CDATA[리플렉션(Reflection) 이란 ? 리플렉션 은 구체적인 클래스 타입을 알지 못하더라도 그 클래스의 메서드, 타입, 변수들에 접근할 수 있도록 도와주는 자바 API를 말한다. 이 프로그래밍 기법은 런타임 시점에 동적으로 특정 클래스의 정보를 추출할 수 있게 도와줘 프로그램에 유연성을 더해준다. 다만, 런타임 시점에 인스턴스를 생성하기 때문에 구체적인 동작 흐름을 파악하기 어려울 수 있다.]]></summary></entry><entry><title type="html">[Spring Security] Spring Security + JWT 구현</title><link href="http://localhost:4000/spring%20security/ch1/" rel="alternate" type="text/html" title="[Spring Security] Spring Security + JWT 구현" /><published>2023-08-08T00:00:00+09:00</published><updated>2023-08-08T00:00:00+09:00</updated><id>http://localhost:4000/spring%20security/ch1</id><content type="html" xml:base="http://localhost:4000/spring%20security/ch1/"><![CDATA[<p>개인 프로젝트 진행을 위해 세팅한 환경 일부를 기록한 글이다.</p>
+  <meta name="author" content="laegel">
+  
+  <meta property="article:author" content="laegel">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="diary">
+<meta property="og:title" content="[Spring Security] Spring Security + JWT 구현">
+<meta property="og:url" content="http://localhost:4000/spring%20security/ch1/">
+
+
+  <meta property="og:description" content="개인 프로젝트 진행을 위해 세팅한 환경 일부를 기록한 글이다.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-08-08T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2023-08-08T00:00:00+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/spring%20security/ch1/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "laegel",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="diary Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/blog/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/blog/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/blog/favicon-16x16.png">
+<link rel="manifest" href="/blog/site.webmanifest">
+<link rel="mask-icon" href="/blog/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          diary
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/index.html">Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">Category</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/img/logo/android-chrome-192x192.png" alt="laegel" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">laegel</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>반갑습니다. :)</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Seoul of Republic Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+
+  
+    
+
+<nav class="nav__list">
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">토글 메뉴</label>
+  <ul class="nav__items" id="category_tag_menu">
+      <li>
+            📂 <span style="font-family:'Cafe24Oneprettynight';">전체 글 수</style> <span style="font-family:'Coming Soon';">6</style> <span style="font-family:'Cafe24Oneprettynight';">개</style> 
+      </li>
+      <li>
+          <span class="nav__sub-title">Java</span>
+          <ul>
+              
+                  
+              
+                  
+                      <li><a href="/blog/categories/java-jvm" class="">JVM (3)</a></li>
+                  
+              
+                  
+              
+              
+                  
+              
+                  
+              
+                  
+                      <li><a href="/blog/categories/java-reflection" class="">Reflection (1)</a></li>
+                  
+              
+          </ul>
+          <span class="nav__sub-title">Spring</span>
+          <ul>
+            
+                
+                    <li><a href="/blog/categories/spring-security" class="">Spring Security (2)</a></li>
+                
+            
+                
+            
+                
+            
+          </ul>
+
+
+      </li>
+      <li>	
+            <br>      
+            <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Flaegel123%2Fblog&count_bg=%23D0AADB&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=visitors&edge_flat=false" style="width:100px">
+      </li>
+  </ul>
+</nav>
+
+
+  
+
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Spring Security] Spring Security + JWT 구현">
+    <meta itemprop="description" content="개인 프로젝트 진행을 위해 세팅한 환경 일부를 기록한 글이다.">
+    <meta itemprop="datePublished" content="2023-08-08T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2023-08-08T00:00:00+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/spring%20security/ch1/" class="u-url" itemprop="url">[Spring Security] Spring Security + JWT 구현
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          6 분 소요
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu"><li><a href="#jwtjson-web-token-란-">JWT(JSON Web Token) 란 ?</a></li><li><a href="#refresh-token-정책-수립">Refresh Token 정책 수립</a><ul><li><a href="#token-재발급-시나리오">Token 재발급 시나리오</a></li></ul></li><li><a href="#서버-환경buildgradle">서버 환경(build.gradle)</a></li><li><a href="#tokenprovider">TokenProvider</a><ul><li><a href="#generatetokendto">generateTokenDto()</a></li><li><a href="#getauthentication">getAuthentication()</a></li><li><a href="#validationtoken">validationToken()</a></li><li><a href="#parseclaims">parseClaims()</a></li></ul></li><li><a href="#jwtfilter">JwtFilter</a><ul><li><a href="#resolvetoken">resolveToken()</a></li><li><a href="#dofilterinternal">doFilterInternal()</a></li></ul></li><li><a href="#jwtauthenticationentrypoint">JwtAuthenticationEntryPoint</a></li><li><a href="#jwtaccessdeniedhandler">JwtAccessDeniedHandler</a></li><li><a href="#jwtsecurityconfig">JwtSecurityConfig</a></li><li><a href="#websecurityconfig">WebSecurityConfig</a></li><li><a href="#securityutil">SecurityUtil</a></li><li><a href="#tokendto">TokenDto</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p>개인 프로젝트 진행을 위해 세팅한 환경 일부를 기록한 글이다.</p>
 
 <hr />
 
@@ -508,350 +866,345 @@ configure() 를 오버라이드하여 jwt 관련 filter 들을 세팅해준다.<
 <p>이제 기본적인 Spring Security + JWT 구현은 끝이 났다. 이후 로그인 및 회원가입 로직을 구미에 맞게 만들면 된다.  <br />
 주의해야 할 점은 비밀번호의 경우 PasswordEncoder를 사용해 검증해야 한다.</p>
 
-<p><a href="#" class="btn btn--primary align-right">맨 위로 이동하기</a></p>]]></content><author><name>laegel</name></author><category term="Spring Security" /><category term="Spring Security" /><summary type="html"><![CDATA[개인 프로젝트 진행을 위해 세팅한 환경 일부를 기록한 글이다.]]></summary></entry><entry><title type="html">[JVM] JVM 총정리 - 런타임 영역(2)</title><link href="http://localhost:4000/jvm/ch1/" rel="alternate" type="text/html" title="[JVM] JVM 총정리 - 런타임 영역(2)" /><published>2023-08-07T00:00:00+09:00</published><updated>2023-08-07T00:00:00+09:00</updated><id>http://localhost:4000/jvm/ch1</id><content type="html" xml:base="http://localhost:4000/jvm/ch1/"><![CDATA[<p><code class="language-plaintext highlighter-rouge">런타임 영역</code> 은 JVM 이 런타임 환경에서 자바 프로그램을 수행할 때 OS 로부터 할당받는 메모리 영역이다. 이 메모리 영역은 논리적으로 다음과 같이 5가지 영역으로 구분한다.</p>
+<p><a href="#" class="btn btn--primary align-right">맨 위로 이동하기</a></p>
 
-<ul>
-  <li>Method Area</li>
-  <li>Heap Area</li>
-  <li>PC Register</li>
-  <li>Native Method Stack</li>
-  <li>JVM Stack</li>
-</ul>
-
-<hr />
+        
+      </section>
 
-<h2 id="method-area">Method Area</h2>
-<p><code class="language-plaintext highlighter-rouge">Method Area</code> 는 JVM 벤더마다 다르게 구현되어 있다. 그러나 거의 모든 운영체제에서는 Hotspot 이라는 벤더를 사용하므로 이것을 기준으로 설명할 것이다.</p>
+      <footer class="page__meta">
+        
+        
+  
 
-<p>Hotspot JVM 벤더는 JDK 8 버전 기준으로 메모리 영역에 변화가 생겼다. 크게는 기존 Perm 영역(Perm Generation) 이 사라지고 Metaspace 영역이 등장하게 된 것인데, Method Area 가 JVM 에서 어떤 역할을 하는지, JDK 8 버전이 되며 어떤 변화가 생겼는지 알아보자.</p>
 
-<h3 id="perm-영역의-역할">Perm 영역의 역할</h3>
-<p><img src="../../assets/img/java/jvm04.png" /></p>
+  
 
-<p><code class="language-plaintext highlighter-rouge">Perm 영역</code> 은 런타임 환경에서 클래스 로더를 통해 로드된 클래스와 메서드의 메타 데이터가 저정되는 영역이다. 전역 변수나 static 변수 또한 이 영역에 저장되고 프로그램이 종료될 때까지 남아있게 된다. 또한 해당 정보에 대한 요청이 오면 실제 
-물리 메모리 주소로 변환할 수 있게 하는 영역이다.</p>
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#spring-security" class="page__taxonomy-item p-category" rel="tag">Spring Security</a>
+    
+    </span>
+  </p>
 
-<p>이 영역에 저장되는 데이터르 좀 더 세부화하자면 다음과 같다.</p>
 
-<h4 id="1-type-information">1. Type Information</h4>
-<ul>
-  <li>클래스와 인터페이스 정보를 뜻한다. 다음과 같은 분류에 따라 정보를 저장한다.
-    <ul>
-      <li>Type 명: Package name + Class name 형식</li>
-      <li>Type 종류: Type 이 Class 인지 Interface 인지에 대한 정보</li>
-      <li>Type 의 제어자: 접근 제어자, 제어자 에 대한 정보</li>
-      <li>연관된 Interface 정보: 사용된 Interface 의 정보</li>
-    </ul>
-  </li>
-</ul>
 
-<h4 id="2-runtime-constant-pool">2. Runtime Constant Pool</h4>
-<ul>
-  <li>Type 의 상수 정보를 저장하는 영역이다. 각 상수는 인덱스를 통해 접근이 가능하다. 또한 method, field, type 으로 접근하기 위한 reference 정보가 저장되기 때문에 독자적인 중요성이 있다.</li>
-</ul>
-
-<h4 id="3-field-information">3. Field Information</h4>
-<ul>
-  <li>인스턴스 변수의 정보를 저장한다.</li>
-</ul>
 
-<h4 id="4-method-information">4. Method Information</h4>
-<ul>
-  <li>메서드의 모든 정보를 저장한다.</li>
-</ul>
+  
 
-<h4 id="5-class-variable">5. Class Variable</h4>
-<ul>
-  <li>static 키워드로 선언된 변수가 저장된다.</li>
-</ul>
 
-<h3 id="perm-영역의-한계">Perm 영역의 한계</h3>
-<p><code class="language-plaintext highlighter-rouge">Perm 영역</code> 은 논리적으로 Method Area 에 속해있지만, 사실 Perm 영역은 Heap Area 내에서 분리된 특수한 공간에 위치한다. 때문에 처음 JVM 에 의해 메모리가 할당이 될 때 영역의 크기가 제한적으로 할당될 수밖에 없고, 이로 인해 런타임 환경에서 
-OutOfMemory 에러 유발 문제와 GC 를 수시로 해줘야 하는 메모리 누수가 유발된다. 이러한 문제들로 인해 JDK 버전이 8로 올라감에 따라 Perm 영역이 제거되고 Metasapce 영역이 새롭게 등장하게 된다.</p>
+  
 
-<h4 id="metaspace-영역의-등장">Metaspace 영역의 등장</h4>
-<p>Perm 영역과 비교해 <code class="language-plaintext highlighter-rouge">Metaspace 영역</code>의 가장 중요한 차이점은 ‘<strong>메모리 할당을 처리하는 방법</strong>‘이 달라졌다는 것이다.<br />
-<code class="language-plaintext highlighter-rouge">Metaspace 영역</code> 은 Native Memory 영역으로 전환되었다. 또한 OS 에 의해 메모리 할당 공간이 자동으로 조절되게끔 바뀌면서 이론상 아키텍쳐가 지원하는 메모리 크기까지 확장할 수 있게 되었다. 따라서 Perm 영역과 비교해 메모리 공간 확보 기능이 향상되었고 
-보다 유연하고 안정적인 메모리 사용을 제공할 수 있게 되었다. 또한 Method Area 이면서 애매하게 Heap Area 에 속해있던 과거와 달리 명확하게 Heap Area 영역과 독립된 개념으로 존재할 수 있게 되었다.</p>
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#spring-security" class="page__taxonomy-item p-category" rel="tag">Spring Security</a>
+    
+    </span>
+  </p>
 
-<p>다음으로 중요한 변경점은 ‘<strong>string 과 static object 의 저장 방법</strong>’ 이다.
-먼저, string 값 저장 방식의 변경은 다음과 같다.<br />
-JDK 8 버전 이하에서 문자열 리터럴 방식을 통해 생성하는 string 값은 Runtime Constant Pool 에 저장되었다. 그러나 JDK 8 버전 이후 Runtime Constant Pool 에서 String Constant Pool 이라는 개념이 별도로 분리되어 Heap Area 에 저장되게 변경되었다.
-이로 인해 string 리터럴 값이 GC 의 대상이 될 수 있어 메모리 관리가 좀 더 효율적으로 이루어 질 수 있게 되었다.</p>
 
-<p>static object 도 마찬가지로 비슷하게 변경되었다.<br />
-기존 Perm 영역에서는 static object 가 Perm 영역에 저장되어 GC 의 대상이 되지 않았지만, JDK 8 버전 이후 Heap Area 에 저장되도록 변경되었고, reference 값만 Metaspace 에서 관리하게 함으로써 사용되지 않는 static object 는 GC 의 대상이 될 수 있게 되었다.</p>
+        
 
-<h2 id="heap-area">Heap Area</h2>
-<p><code class="language-plaintext highlighter-rouge">Heap Area</code> 는 Object 클래스를 상속받는 모든 객체들(클래스 인스턴스)과 해당 인스턴스 변수들을 담는 공간이다. 이곳에서는 실제 데이터를 가진 인스턴스와 배열 뿐만 아니라 문자열에 대한 정보를 가진 String Constant Pool(JDK 8 이후) 등이 저장된다.</p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2023-08-08">August 8, 2023</time></p>
 
-<p>이 영역은 JVM 당 하나만 생성이 되며, 해당 영역이 가진 데이터는 모든 JVM Stack 영역에서 참조되어 thread 간 공유되기 때문에 같은 애플리케이션을 사용하는 thread 사이에서 인스턴스를 공유하는 경우 동기화 문제가 수반될 수 있다. 또한 참조되지 않는 
-인스턴스와 배열에 대한 정보를 얻을 수 있기 때문에 GC 의 주 대상이 되는 영역이다.</p>
+      </footer>
 
-<h3 id="hotspot-jvm-의-heap-area-구조">Hotspot JVM 의 Heap Area 구조</h3>
-<p>앞서 설명한 이유와 마찬가지로 Hotspot 모델을 기반으로 한 HEAP Area 영역에 대해 살펴보자.
-<img src="../../assets/img/java/jvm05.png" /></p>
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
 
-<p>Hotspot JVM 은 크게 Yong 영역과 Old 영역으로 나뉘어져 있다.</p>
+  <a href="https://twitter.com/intent/tweet?text=%5BSpring+Security%5D+Spring+Security+%2B+JWT+%EA%B5%AC%ED%98%84%20http%3A%2F%2Flocalhost%3A4000%2Fspring%2520security%2Fch1%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-<p><code class="language-plaintext highlighter-rouge">Yong 영역</code>은 객체가 새로 생성되면 할당되는 영역으로, 상태에 따라 Eden, Servior0, Servior1 영역으로 구분되어 저장된다.<br />
-대부분의 객체가 금방 Unreachable 상태가 되기 때문에 (어떠한 경우에도 절대 실행되지 않는 상태), 많은 객체가 이 영역에서 생성되었다가 사라진다. 이 영역에서 발생하는 GC 를 Minor GC 라고 부른다.</p>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fspring%2520security%2Fch1%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-<p><code class="language-plaintext highlighter-rouge">Old 영역</code>은 Yong 영역에서 Reachable 상태를 유지하며 살아남은 객체가 복사되는 영역이다. 계속해서 사용되는 객체들이 저장되는 공간이기 때문에 Yong 영역보다 크게 할당되며 GC 작업 시간이 Minor GC 보다 훨씬 오래 걸린다.<br />
-이 영역에서 일어나는 GC를 Major GC 라 부른다.</p>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2520security%2Fch1%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
 
-<h2 id="pc-register">PC Register</h2>
-<p><code class="language-plaintext highlighter-rouge">PC Register</code> 는 쓰레드가 현재 실행중인 메서드의 명령을 담고 있는 JVM 명령어 주소를 저장한다.</p>
 
-<p>명령어가 자바 메서드를 수행하고 있다면 JVM 명령어의 주소를 저장하지만, 만약 다른 언어의 메서들를 수행한다면 UNDEFINED 상태가 되고, 다른 언어의 메서드는 뒤에 설명할 Native Method Stack Srea 에서 수행하게 된다.</p>
+      
 
-<h2 id="jvm-stack">JVM Stack</h2>
-<p><code class="language-plaintext highlighter-rouge">JVM Stack</code> 은 메서드를 호출할 때마다 frame 이라는 단위의 정보를 push(추가) 하고 메서드가 종료되면 해당 frame을 pop(제거) 하는 동작을 수행한다. 이런 특징으로 자바에서 변수는 선언된 블록 안에서만 유효하고, 블록을 벗어나면 스택에서 제거되어 알 수 없게 된다.</p>
 
-<p>frame 은 다음 3가지로 구성된다.</p>
-<ul>
-  <li>Local Variable: 메서드의 지역 변수들을 갖는다.</li>
-  <li>Operand Stack: 메서드 내 계산을 위한 작업 공간이다. 바이트 코드 명령문들이 들어있는 공간이라고 할 수 있다.</li>
-  <li>Constant Pool Reference: Constant Pool 참조를 위한 공간이다.</li>
-</ul>
-
-<h2 id="native-method-stack">Native Method Stack</h2>
-<p>프로그램을 실행하다 보면 경우에 따라서는 순수하게 JAVA로 구성된 코드만을 사용할 수 없는 시스템의 자원이나 API가 존재한다. 이러한 다른 프로그래밍 언어로 작성된 메서드들을 native method 라고 하는데, Native Method Stack 은 이런 native method 
-들을 다루는 영역이다.</p>
-
-<p>기본 동작 과정은 다음과 같다.
-<img src="../../assets/img/java/jvm06.png" /></p>
-
-<p>일반적인 메서드가 실행될 때 해당 frame 들이 JVM Stack 에 쌓이며 실행이 되다가 native method 를 만나면 해당 메서드를 Native Method Stack Area 에 쌓고 수행이 끝난 뒤 다시 JVM Stack 으로 돌아오게 된다. 이 때, native method 를 호출한 
-stack frame 으로 돌아가는 것이 아닌 새로운 stack frame 을 생성하여 다시 작업을 수행하게 된다. 그렇기 때문에 native code 로 되어있는 함수의 호출을 자바 프로그램 내에서 직접 수행할 수 있고, 그 결과를 받아올 수 있는 것이다.</p>
-
-<p>결과적으로 JVM 은 Native Stack Frame 영역을 통해 JNI(Java Native Interface) 방식을 지원한다고 할 수 있겠다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>여기서 JNI(Java Native Interface) 란 다른 언어로 작성된 라이브러리들을 호출하거나 반대로 호출되는 것을 가능하게 하는 프로그래밍 프레임워크를 말한다.
-</code></pre></div></div>
-
-<p><a href="#" class="btn btn--primary align-right">맨 위로 이동하기</a></p>]]></content><author><name>laegel</name></author><category term="JVM" /><category term="Java" /><category term="JVM" /><summary type="html"><![CDATA[런타임 영역 은 JVM 이 런타임 환경에서 자바 프로그램을 수행할 때 OS 로부터 할당받는 메모리 영역이다. 이 메모리 영역은 논리적으로 다음과 같이 5가지 영역으로 구분한다.]]></summary></entry><entry><title type="html">[JVM] JVM 총정리 - 실행 엔진(3)</title><link href="http://localhost:4000/jvm/ch2/" rel="alternate" type="text/html" title="[JVM] JVM 총정리 - 실행 엔진(3)" /><published>2023-08-07T00:00:00+09:00</published><updated>2023-08-07T00:00:00+09:00</updated><id>http://localhost:4000/jvm/ch2</id><content type="html" xml:base="http://localhost:4000/jvm/ch2/"><![CDATA[<p><code class="language-plaintext highlighter-rouge">실행 엔진</code>은 Runtime Data Area 에 적재된 바이트코드들을 실행하고 사용되지 않는 데이터들을 제거하는 역할을 하며 세 가지 장치로 구분된다.</p>
-<ul>
-  <li>인터프리터(Interpreter)</li>
-  <li>JIT Compiler</li>
-  <li>Garbage Collector</li>
-</ul>
-
-<h2 id="인터프리터interpreter">인터프리터(Interpreter)</h2>
-<p>JVM 인터프리터는 런타임 환경에서 바이트코드를 한 라인씩 읽고 Native Code 로 변환하는 작업을 수행한다. 한 줄씩 기계어로 번역하는 만큼 번역속도는 빠르지만 전체 실행속도는 느리다. 또한 중복되는 바이트코드들에 대해서도 매번 컴파일을 하기 때문에 
-비효율적이라는 단점이 있다. 이러한 인터프리터 방식의 단점을 보완하기 위해 자바는 1.2 버전부터 뒤이어 설명할 JIT Compiler 를 출시하고 지속적으로 업데이트하면서 속도의 많은 부분이 개선되었다.</p>
-
-<h2 id="jit-compilerjust-in-time">JIT Compiler(Just In Time)</h2>
-<p>앞서 설명한 인터프리터 방식의 속도 문제를 해결하기 위해 디자인 된 기능이다. JIT Compiler 는 이 자주 실행되는 기준을 ‘<strong>컴파일 임계치</strong>’ 라는 개념의 단위로 판단한다.<br />
-컴파일 임계치를 구하는 방법은 다음과 같다.</p>
-<ul>
-  <li>method entry counter: JVM 내에 있는 메서드가 호출된 횟수</li>
-  <li>back-edge loop counter: 메서드가 루프를 빠져나오기까지 회전한 횟수</li>
-</ul>
-
-<p>JIT Compiler는 컴파일 임계치가 일정 횟수에 도달한 코드를 캐싱하기 충분하다고 판단한다. 캐싱하기 충분하다고 판단된 코드는 컴파일 스레드에 의해 컴파일되기를 기다렸다가 실행되게 된다.</p>
-
-<p>이 컴파일 임계치는 JVM 옵션을 통해 관련된 값을 조절할 수 있다.</p>
-
-<h2 id="garbage-collector">Garbage Collector</h2>
-<p>프로그램이 실행되다 보면 유효하지 않은 메모리인 가비지가 발생하게 되는데 이러한 불필요한 객체들(unreachable objects)을 분별해내고 정리해주는 것이 JVM의 Garbage Collector 이다. GC가 시작되면 JVM은 GC를 실행하는 쓰레드를 제외한 
-모든 쓰레드들의 작업이 중단된다. 이러한 특징으로 인해 GC 실행 시간을 줄이고자 다양한 알고리즘이 등장하였다.</p>
-
-<h3 id="gc-의-동작-방식">GC 의 동작 방식</h3>
-
-<p>GC 의 대상이 되는 영역인 Heap Area 는 다음과 같은 구조로 이루어져 있다.
- <img src="../../assets/img/java/jvm08.png" />
- (JDK 8 이후로 Perm 영역은 제거되었다)</p>
-
-<p>크게 Yong 영역과 Old 영역으로 이루어져 있으며, Yong 영역은 1개의 Eden 영역, 2개의 Survivor 영역으로 나뉘어져 있다.</p>
+  
+  
+  
+    
+    
+    
 
-<p>GC 는 Yong 영역과 Old 영역에서 일어나는 GC 작업을 구분하여 진행한다. <br />
-Yong 영역에서 일어나는 GC 를 <code class="language-plaintext highlighter-rouge">Minor GC</code>라 하고, Old 영역에서 일어나는 GC를 <code class="language-plaintext highlighter-rouge">Major GC</code> 또는 <code class="language-plaintext highlighter-rouge">Full GC</code>라고 한다.</p>
-
-<h4 id="minor-gc">Minor GC</h4>
-<p>Heap Area의 Yong 영역에서 일어나는 GC를 <code class="language-plaintext highlighter-rouge">Minor GC</code>라 부른다. Yong 영역은 새롭게 생성되는 객체가 Allocation(할당)되는 영역이다. 대부분의 객체가 이 영역에서 금방 접근 불가능한 상태(Unreachable)가 되기 때문에, 많은 객체가 Yong 영역에서 GC의 
-대상이 되어 제거된다. Minor GC가 실행되면 참조되고 있는 객체들을 제외한 나머지 객체들은 제거되게 된다.</p>
-
-<p>Minor GC 가 진행되는 세부 과정은 다음과 같다.
-<img src="../../assets/img/java/jvm09.png" /></p>
-
-<ol>
-  <li>새로 생성된 객체가 <code class="language-plaintext highlighter-rouge">Eden 영역</code>에 할당된다.</li>
-  <li>객체가 계속 생성되다가 Eden 영역이 가득 차게 되면 Minor GC가 실행된다.</li>
-  <li>참조되지 않는 객체들은 제거되고 살아남은 객체들은 Survivor1 영역으로 복사된다.</li>
-  <li>이후 Survivor1 영역이 가득차게 되거나 Eden 영역이 가득 차게되면 GC 작업 수행 이후 살아남은 객체들이 Survivor2 영역으로 복사된다.</li>
-  <li>Eden 영역이나 Survivor2 영역이 가득 차게되면 GC 작업을 수행하고 살아남은 객체들이 Survivor1 영역으로 복사된다.</li>
-  <li>1~5 번 과정이 반복된다.</li>
-  <li>이렇게 반복적으로 Survivor1, Survivor2 를 거쳐 계속해서 살아남은 객체는 GC 횟수가 어떤 임계값을 넘어갈 경우 Old 영역으로 Promotion(이동)하게 된다.</li>
-</ol>
-
-<p>이 과정 중 주의해야 할 점은 두 개의 Survivor 영역 중 한 개는 반드시 사용되어야 한다는 것이다. 만약 두 Survivor 영역에 모두 데이터가 존재하거나, 모두 사용량이 0이라면 그 시스템은 무언가 문제가 있음을 알 수 있다.<br />
-또한 각 Object 마다 Object Header 에 Minor GC 에서 살아남은 횟수를 의미하는 age 가 기록되어 있는데, 이 값이 다음 Minor GC 에서 Promotion(이동) 여부를 결정하는 변수가 된다.</p>
-
-<h4 id="major-gc또는-full-gc">Major GC(또는 Full GC)</h4>
-<p><code class="language-plaintext highlighter-rouge">Major GC</code>는 Old 영역에서 일어나는 GC를 말한다. Old 영역은 Yong 영역에서 Reachable 상태를 유지하며 살아남은 객체들이 복사되는 영역으로, Yong 영역보다 훨씬 크게 할당된다. Old 영역 자체의 크기도 크고 대부분의 객체들이 Yong 영역에서 GC의 
- 대상이 되어 Major GC는 비교적 자주 발생하지는 않지만, 한 번 발생하면 그 시간은 Minor GC보다 훨씬 오래 걸린다. 그래서 GC에 대한 튜닝을 진행할 때는 보통 Major GC의 성능을 높이는 경우가 많다.</p>
-
-<h3 id="gc의-특징">GC의 특징</h3>
-<p>Yong 영역과 Old 영역은 서로 다른 메모리 구조로 되어있기 때문에 세부적인 GC 동작 방식은 다르다. 하지만 기본적으로 GC가 진행된다고 했을 때 두 가지 공통적인 특징을 가진다.</p>
-<ul>
-  <li>Stop the world</li>
-  <li>Mark and Sweep</li>
-</ul>
-
-<h4 id="stop-the-world">Stop the World</h4>
-<p><code class="language-plaintext highlighter-rouge">Stop the World</code>는 JVM이 GC를 실행하기 위해 애플리케이션 실행을 잠시 멈추는 작업이다. GC가 실행될 때는 GC를 실행하는 thread를 제외한 모든 thread들의 작업이 중단되고, GC가 완료되면 작업이 재개된다.</p>
-
-<h4 id="mark-and-sweep">Mark and Sweep</h4>
-<p><code class="language-plaintext highlighter-rouge">Stop the World</code>를 통해 모든 작업이 중단되면, GC는 스택의 모든 변수 또는 reachable 객체를 스캔하면서 각각 어떤 객체를 참조하고 있는지 탐색한다. 그리고 사용되고 있는 객체들을 식별하는데, 이 과정을 ‘<strong>Mark</strong>’ 라고 한다. 이후에 Mark 되지 않는 
-객체들을 메모리에서 제거하는 과정을 ‘<strong>Sweep</strong>’ 이라고 한다.</p>
-
-<h3 id="gc의-다양한-알고리즘">GC의 다양한 알고리즘</h3>
-<p>GC에는 많은 알고리즘이 있지만 그 중 대표되는 알고리즘 몇 개를 소개하겠다.</p>
-
-<h4 id="serial-collector">Serial Collector</h4>
-<p><code class="language-plaintext highlighter-rouge">Serial Collector</code>는 싱글 스레드로 모든 종류의 GC를 수행하는 고전적 방식의 Garbage Collector 이다. 이 방식은 싱글 프로세서 시스템에 가장 적합하다.
- 1 개의 thread 만을 이용해 모든 GC 일을 처리하기 때문에 CPU 코더가 여러 개인 운영서버에서 <code class="language-plaintext highlighter-rouge">Serial Collector</code>를 사용하는 것은 반드시 피해야 한다.</p>
-
-<ul>
-  <li>Yong 영역 알고리즘: Serial</li>
-  <li>Old 영역 알고리즘: Serial Mark-Seep-Compact</li>
-</ul>
-
-<h4 id="parallel-collector">Parallel Collector</h4>
-<p>멀티 프로세서나 멀티 스레드 하드웨어에서 돌아가는 중대형 규모의 데이터셋을 다루는 애플리케이션을 위한 GC 방식이다. <code class="language-plaintext highlighter-rouge">Parallel Collector</code>의 목표는 다른 CPU가 GC의 진행시간 동안 대기 상태로 남아있는 것을 최소화하는 것이다. 이를 위해
-<code class="language-plaintext highlighter-rouge">Parallel Collector</code>는 Minor GC를 병렬로 수행하게 하여 GC의 오버헤드를 현저하게 줄이고 성능을 향상시키게 한다. <code class="language-plaintext highlighter-rouge">Parallel Collector</code>는 GC의 오버헤드를 상당히 줄여주어 Java 8 버전까지 기본 Garbage Collector 로 사용되었다. 그러나 
-애플리케이션이 멈추는 고질적인 현상은 지속되어 이후에 개발된 알고리즘이 사용되게 된다.</p>
-
-<ul>
-  <li>Yong 영역 알고리즘: Parallel Scavenge</li>
-  <li>Old 영역 알고리즘: Serial Mark-Seep-Compact</li>
-</ul>
 
-<h4 id="concurrent-mark-sweep-cms">Concurrent Mark-Sweep (CMS)</h4>
-<p><code class="language-plaintext highlighter-rouge">CMS Collector</code> 는 애플리케이션이 일시 정지되는 이슈에 매우 민감할 때 사용되는 방식이다. 예컨대 힙 메모리의 크기가 클 때 이 방식을 사용한다.<br />
-이 방식은 프로세서 리소스를 GC와 공유하는 방식으로, 자원이 GC를 위해 사용하기 때문에 응답이 느려지지만 애플리케이션이 멈추지는 않게 된다. 그러나 CMS는 다른 GC 방식보다 메모리와 CPU를 많이 필요로해 여러 문제점들이 있었고 결국 Java 9 버전
-부터 deprecated 되었다.</p>
+  <nav class="pagination_prev_next">
+    
+      <a href="/spring%20security/ch0/" class="pagination_prev_next--pager"><span class="prev_next">이전 글  &nbsp</span>[Spring Security] Spring Security 란 ?</a>
+    
+    
+      <a href="#" class="pagination_prev_next--pager disabled">가장 최근 글입니다</a>
+    
+  </nav>
 
-<h4 id="garbage-first-garbage-collector-g1gc">Garbage-First Garbage Collector (G1GC)</h4>
-<p><code class="language-plaintext highlighter-rouge">G1GC</code>는 장기적으로 많은 문제를 일으킬 수 있는 <code class="language-plaintext highlighter-rouge">CMS GC</code>를 대체하기 위해 개발되었고, Java 7 버전부터 지원되기 시작했다. 이 방식은 Yong 영역과 Old 영역으로 나누는 방식을 사용하지 않고 전체 Heap을 1MB 단위의 region(리전)들로 균등하게 나누고 
-각 지역들을 역할과 함께 논리적으로 구분하여 객체를 할당하는 방식이다.<br />
- <code class="language-plaintext highlighter-rouge">G1GC</code>에서는 기존 Eden, Survivor, Old 역할에 더해 Humongous 와 Available/Unused 라는 두 가지 역할이 추가되었다.</p>
-<ul>
-  <li>Humongous: region 크기가 50%를 초과하는 객체를 저장하는 region 을 의미gksek.</li>
-  <li>Available/Unused: 사용되지 않는 region을 의미한다.</li>
-</ul>
 
-<p><code class="language-plaintext highlighter-rouge">G1GC</code>의 핵심은 Heap 을 동일한 크기의 region 으로 나누고, 새로 추가된 역할을 참고하여 가비지가 많은 region 을 우선적으로 GC 작업을 수행하는 것이다.
- <img src="../../assets/img/java/jvm10.png" /></p>
+    </div>
 
-<h5 id="minor-gc-1">Minor GC</h5>
-<p>Eden 지역에서 GC가 수행되면 살아남은 객체를 Mark(식별) 하고, 메모리를 Sweep(회수) 한다. 그리고 이 객체들을 다른 지역으로 이동시키게 된다. 복제되는 지역이 Available/Unused 지역이면 해당 지역은 Survivor 영역이 되고, Eden 영역이면 
- Available/Unused 지역이 된다. 한 지역에 객체를 할당하다가 해당 지역이 꽉 차면 다른 지역에 객체를 할당하고, Minor GC를 실행한다. G1 GC는 각 지역을 추적하고 있기 때문에, Garbage First(가비지가 가장 많은 지역) 를 찾아서 Mark and Sweep 을 수행한다.</p>
+    
+  </article>
 
-<h5 id="major-gc-full-gc">Major GC (Full GC)</h5>
-<p>여기에서 G1 GC의 장점이 드러난다. 기존 다른 GC 들은 모든 Heap 영역에서 GC가 수행되어 처리 시간이 상당히 오래 걸렸지만, G1 GC는 어느 영역에 가비지가 많은지 추적하고 있기 때문에 GC를 수행할 지역을 조합하여 해당 지역에 대해서만 GC를 수행한다.
-시스템이 계속 운영되다가 객체가 너무 많아 빠르게 메모리를 회수할 수 없을 때 Major GC(Full GC) 가 실행된다.</p>
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">참고</h2>
+      <div class="grid__wrapper">
+        
+          
 
-<p>이러한 방식의 G1 GC는 앞의 어떠한 GC 방식보다 처리 속도가 빠르며, 큰 메모리 공간에서 멀티 프로세스를 기반으로 운영되는 애플리케이션에서도 안정적으로 운용이 가능하기 때문에 Java9부터 기본 GC로 사용되게 되었다.</p>
 
-<p><a href="#" class="btn btn--primary align-right">맨 위로 이동하기</a></p>]]></content><author><name>laegel</name></author><category term="JVM" /><category term="Java" /><category term="JVM" /><summary type="html"><![CDATA[실행 엔진은 Runtime Data Area 에 적재된 바이트코드들을 실행하고 사용되지 않는 데이터들을 제거하는 역할을 하며 세 가지 장치로 구분된다. 인터프리터(Interpreter) JIT Compiler Garbage Collector]]></summary></entry><entry><title type="html">[JVM] JVM 총정리 - 클래스 로더(1)</title><link href="http://localhost:4000/jvm/ch0/" rel="alternate" type="text/html" title="[JVM] JVM 총정리 - 클래스 로더(1)" /><published>2023-07-31T00:00:00+09:00</published><updated>2023-07-31T00:00:00+09:00</updated><id>http://localhost:4000/jvm/ch0</id><content type="html" xml:base="http://localhost:4000/jvm/ch0/"><![CDATA[<p><code class="language-plaintext highlighter-rouge">JVM</code> 은 사용자 컴퓨터 운영체제에 맞는 JRE 에 포함되어 있는 소프트웨어로, 바이트 코드로 변환된 자바 코드를 실행시켜주는 역할을 한다. 또한 자바 프로그램을 실행함에 있어 .class 파일에 대한 유효성 검사와 메모리 관리, GC 등의 작업을 수행하기 때문에 매우 중요한 소프트웨어라고 할 수 있다.</p>
 
-<p>먼저 JVM 내부 구조를 살펴보자.</p>
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/reflection/ch0/" rel="permalink">[Java] 리플렉션(Reflection) 알아보기
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
 
-<h2 id="1-jvm-내부구조">1. JVM 내부구조</h2>
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          최대 1 분 소요
+        
+      </span>
+    
+  </p>
 
-<p><code class="language-plaintext highlighter-rouge">JVM</code> 은 크게 다음과 같이 이루어져 있다.</p>
 
-<ul>
-  <li>클래스 로더 (class loader)</li>
-  <li>실행 엔진 (execution engine)
-    <ul>
-      <li>인터프리터 (interpreter)</li>
-      <li>JIT Compiler</li>
-      <li>가비지 콜렉터 (garbage collector)</li>
-    </ul>
-  </li>
-  <li>런타임 영역 (runtime data area)</li>
-</ul>
+    <p class="archive__item-excerpt" itemprop="description">리플렉션(Reflection) 이란 ?
+리플렉션 은 구체적인 클래스 타입을 알지 못하더라도 그 클래스의 메서드, 타입, 변수들에 접근할 수 있도록 도와주는 자바 API를 말한다. 이 프로그래밍 기법은 런타임 시점에 동적으로 특정 클래스의 정보를 추출할 수 있게 도와줘 프로그램에 유...</p>
+  </article>
+</div>
+
+        
+          
 
-<p>이것을 그림으로 표현하면 다음과 같다.<br />
-<img src="../../assets/img/java/jvm01.png" /></p>
+
 
-<h2 id="2-클래스-로더-class-loader">2. 클래스 로더 (Class Loader)</h2>
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/jvm/ch2/" rel="permalink">[JVM] JVM 총정리 - 실행 엔진(3)
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
 
-<p>클래스 로더는 런타임 환경에서 동적으로 .class 파일을 읽어 런타임 영역 (Runtime Data Area) 에 적재한다. 뿐만 아니라 클래스 파일이 유효한지 검증하고, 필드 및 메서드를 초기화 하는 역할을 하는 매우 중요한 부분이다.
-클래스 로더는 위 역할을 수행하기 위해 크게 세 가지 과정을 거쳐 동작하는데 그림으로 표현하자면 다음과 같다.
- <img src="../../assets/img/java/jvm02.png" /></p>
+    
+      
+      
 
-<h3 id="2-1-로딩-loading">2-1. 로딩 (Loading)</h3>
-<p>로딩 단계는 JVM 이 런타임 환경에서 필요한 클래스 파일을 찾아 탑재하는 과정을 말한다. 이 동작은 각각의 클래스 파일들이 JDK 에 의해 기본적으로 제공받는 클래스 파일인지 혹은 개발자가 정의한 클래스 파일인지와 같은 기준에 의해
-세 가지 Class Loader 로 나뉘어 실행된다.<br />
- <img src="../../assets/img/java/jvm03.png" /></p>
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 분 소요
+        
+      </span>
+    
+  </p>
 
-<h4 id="2-1-1-bootstrap-class-loader">2-1-1. Bootstrap Class Loader</h4>
-<p>JVM 이 시작되고 가장 최초로 실행되는 최상위 Class Loader 이다. <code class="language-plaintext highlighter-rouge">Bootstrap Class Loader</code> 는 JDK 8 기준으로 jre/lib/rt.jar 파일에 위치한 자바 런타임 코어 클래스들을 로드한다. 런타임 코어 클래스들에는 java.lang, java.util 등과 같은
-필수 패키지들이 들어있다.<br />
- <code class="language-plaintext highlighter-rouge">Bootstrap Class Loader</code> 는 가장 상위의 Class Loader 이므로 다른 Clas Loader 와 다르게 탑재되는 운영체제에 맞게 Native Code 로 쓰여있다.</p>
 
-<h4 id="2-1-2-extensions-class-loader">2-1-2. Extensions Class Loader</h4>
-<p><code class="language-plaintext highlighter-rouge">Bootstrap Class Loader</code> 다음으로 우선순위를 가지는 Class Loader 이다. 주로 jre/lib/ext 디렉토리나 java.ext.dirs 환경 변수로 지정한 디렉토리 안에 있는 클래스 파일들을 로딩하며 JDK 확장 라이브러리들을 다룬다.</p>
+    <p class="archive__item-excerpt" itemprop="description">실행 엔진은 Runtime Data Area 에 적재된 바이트코드들을 실행하고 사용되지 않는 데이터들을 제거하는 역할을 하며 세 가지 장치로 구분된다.
 
-<h4 id="2-1-3-application-class-loader">2-1-3. Application Class Loader</h4>
-<p>자바 프로그램 실행 시 classpath 에 있는 클래스 혹은 jar 에 속한 클래스들을 로드한다. 주로 개발자들이 작성한 자바 코드 클래스 파일들을 탑재하는 역할을 하고 있다.</p>
+  인터프리터(Interpreter)
+  JIT Compiler
+  Garbage Collector
 
-<blockquote>
-  <h3 id="jdk-9-버전-이후-변경점">JDK 9 버전 이후 변경점</h3>
-  <p>JDK 9 버전 이후 JDK 에 module 개념이 새롭게 탑재되며 기존 jre, ext 디렉토리 등이 삭제되고 해당 기능들은 작은 단위의 모듈로 분리되게 되었다. 이로 인해 자바 프로그램이 전체 JDK 를 실행하지 않아 더 효율적인 포맷으로 진화하였다.
- 또한 이러한 변경점으로 인해 주요 Class Loader 들의 주요 기능이나 명칭도 변경되었다. 아래는 JDK 9 버전 이후의 변경점이다.</p>
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/jvm/ch1/" rel="permalink">[JVM] JVM 총정리 - 런타임 영역(2)
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 분 소요
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">런타임 영역 은 JVM 이 런타임 환경에서 자바 프로그램을 수행할 때 OS 로부터 할당받는 메모리 영역이다. 이 메모리 영역은 논리적으로 다음과 같이 5가지 영역으로 구분한다.
+</p>
+  </article>
+</div>
 
-  <h4 id="1-bootstrap-class-loader">1. Bootstrap Class Loader</h4>
-  <p>기존에는 모든 Java SE 클래스들을 로드할 수 있었지만, rt.jar 가 모듈화되어 작은 단위로 나뉘어지면서 java.base 같은 중요한 모듈의 클래스 로딩만 다루게 역할이 축소되었다.</p>
+        
+          
 
-  <h4 id="2-platform-class-loader">2. Platform Class Loader</h4>
-  <p>Extensions Class Loader 에서 명칭이 변경되었다. Java SE 플랫폼에 있는 모든 클래스들에 대해 로더 역할을 수행할 수 있게 확장되었으며 Java SE 플랫폼에 속해있지 않은 표준화된 JCP(Java Community Process) 클래스에 대해서도 로더 역할을 할 수 있게 변경되었다.</p>
 
-  <h4 id="3-system-class-loader">3. System Class Loader</h4>
-  <p>Application Class Loader 에서 명칭이 변경되었다. Java SE 나 모듈이 아닌 모듈들에 대해서도 default 로더 역할을 수행할 수 있게 변경되었다.</p>
 
-  <p>자세한 변경사항은 <a href="https://homoefficio.github.io/2018/10/14/Java-URLClassLoader%EB%A1%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EB%8A%94-%ED%81%B4%EB%9E%98%EC%8A%A4%EB%A1%9C%EB%94%A9/">다음</a></p>
-</blockquote>
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/jvm/ch0/" rel="permalink">[JVM] JVM 총정리 - 클래스 로더(1)
+</a>
+      
+    </h2>
+    
 
-<h3 id="loading-동작-방식">Loading 동작 방식</h3>
-<p>Class Loader 는 다음과 같은 위임 방식으로 클래스들을 로딩한다.<br />
-<em>System Class Loader -&gt; Platform Class Loader -&gt; Bootstrap Class Loader</em></p>
+  <p class="page__meta">
+    
 
-<p>요청한 클래스가 위와 같은 위임 과정을 거쳐 Class Loader 에 의해 로드가 되지 않는다면 java.lang.ClassNotFoundException 이 발생하겟지만, 로드에 성공한다면 내용에 맞는 바이너리 데이터를 생성한 뒤 메모리의 Method Area 에 저장한다. 그 후 Class<객체이름> 형태의 해당 클래스
-타입의 class 객체를 생성해 Heap 영역에 저정하게 된다.</객체이름></p>
+    
 
-<h3 id="2-2-링킹-linking">2-2. 링킹 (Linking)</h3>
-<p>이 단계에서는 로드된 클래스나 인터페이스, 필요한 경우 요소 타입을 검증하고 사용할 수 있게 준비하는 과정을 포함한다. 이 작업은 Verification, Preparation, Resolution 이라는 세 단계로 이루어진다.</p>
+    
+      
+      
 
-<h4 id="1-검증-verification">1) 검증 (Verification)</h4>
-<p>클래스 로더가 .class 파일의 바이트코드를 자바 언어 명세서 (Java Language Specification) 에 따라서 코드를 제대로 작성했는지, JVM 규격에 맞게 검증된 컴파일러에서 .class 파일이 생성되었는지 등을 확인하여 .class 파일의 정확성을 보장해준다.<br />
- 내부적으로 바이트 코드 검증기가 이 과정을 담당하며 만약 검증이 실패한다면 java.lang.VerifyError 를 발생시킨다. 다만, Bootstrap ClassLoader 에 의해 로드된 클래스들은 신뢰성이 높은 자원에서 로드된 클래스들이기 때문에 해당 Verification 단계를 거치지 않는다.</p>
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 분 소요
+        
+      </span>
+    
+  </p>
 
-<p>이러한 Verification 은 사실 컴파일 단계에서도 수행이 된다. 하지만 JVM 에서 다시 한 번 이 검증을 거치게 되면서 클래스 파일의 악의적인 혹은 유효하지 않는 변경을 미연에 방지할 수 있게 된다.</p>
 
-<h4 id="2-준비-preparation">2) 준비 (Preparation)</h4>
-<p>이 단계에서는 static fields 에 대한 메모리를 할당한다. 다만, 주어진 값으로 초기화는 나중에 진행될 Initializa 단계에서 실행되면 이 단계에서는 타입의 기본 값으로 초기화가 진행된다. 때문에 이 단계에서 클래스 파일의 코드를 작동시키진 않는다.<br />
-만약, 이 단계에서 할당할 메모리 공간이 부족하다면 OutOfMemoryError 가 발생한다.</p>
+    <p class="archive__item-excerpt" itemprop="description">JVM 은 사용자 컴퓨터 운영체제에 맞는 JRE 에 포함되어 있는 소프트웨어로, 바이트 코드로 변환된 자바 코드를 실행시켜주는 역할을 한다. 또한 자바 프로그램을 실행함에 있어 .class 파일에 대한 유효성 검사와 메모리 관리, GC 등의 작업을 수행하기 때문에 매우 중요한 소프...</p>
+  </article>
+</div>
 
-<h4 id="3-해석-resolutions">3) 해석 (Resolutions)</h4>
-<p>해석 단계는 해당 클래스의 참조된 클래스들을 로드하는 과정이다. 이 과정은 Linking 의 Preparation 단계에서 수행될 수도 있고, Initialization 단계 이후 수행될 수도 있다.</p>
+        
+      </div>
+    </div>
+  
+  
+</div>
 
-<p>Linking 작업은 필요할 때마다 동적으로 이루어지기 때문에 Dynamic Linking 이라는 표현을 사용하기도 한다.<br />
-사실 .class 파일은 실행 시 Link 될 수 있도록 Symbolic Reference 만을 가지고 있다. 이 Symblic Reference 는 해석 단계에서 Method Area 의 Runtime Constant Pool 을 거쳐 실제로 존재하는 물리적인 주소로 대체되게 된다. 이러한 과정의 Dynamic Linking 덕분에 class 파일의
-크기를 작게 유지할 수 있어 메모리 요구사항이 훨씬 적어지게 된다.</p>
+    </div>
 
-<h3 id="2-3-초기화-initialization">2-3. 초기화 (Initialization)</h3>
+    
 
-<p>이 과정에서는 로드된 각 클래스나 인터페이스의 코드를 읽고 초기화 로직이 실행되게 된다. static 변수와 메서드가 코드에 명시된 원래 값으로 할당이 되고, 정적 초기화 블록이 실행되게 된다. 이 작업은 클래스의 위에서 아래로, 클래스 계층 구조에서 부모부터 자식까지 한 줄씩 진행된다.</p>
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
 
-<p>초기화 과정까지 거쳐 클래스 탑재 과정이 끝나게 된다면 본격적으로 JVM 에서 클래스 파일을 구동시킬 준비가 끝나게 된다.</p>
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
 
-<p><a href="#" class="btn btn--primary align-right">맨 위로 이동하기</a></p>]]></content><author><name>laegel</name></author><category term="JVM" /><category term="Java" /><category term="JVM" /><summary type="html"><![CDATA[JVM 은 사용자 컴퓨터 운영체제에 맞는 JRE 에 포함되어 있는 소프트웨어로, 바이트 코드로 변환된 자바 코드를 실행시켜주는 역할을 한다. 또한 자바 프로그램을 실행함에 있어 .class 파일에 대한 유효성 검사와 메모리 관리, GC 등의 작업을 수행하기 때문에 매우 중요한 소프트웨어라고 할 수 있다.]]></summary></entry><entry><title type="html">[Spring Security] Spring Security 란 ?</title><link href="http://localhost:4000/spring%20security/ch0/" rel="alternate" type="text/html" title="[Spring Security] Spring Security 란 ?" /><published>2023-07-23T00:00:00+09:00</published><updated>2023-07-23T00:00:00+09:00</updated><id>http://localhost:4000/spring%20security/ch0</id><content type="html" xml:base="http://localhost:4000/spring%20security/ch0/"><![CDATA[<p>이건 테스트입니다 하하하하하</p>
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
 
-<p>TestTest</p>
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+    
+  </ul>
+</div>
 
-<p><a href="#" class="btn btn--primary align-right">맨 위로 이동하기</a></p>]]></content><author><name>laegel</name></author><category term="Spring Security" /><category term="Spring Security" /><summary type="html"><![CDATA[이건 테스트입니다 하하하하하]]></summary></entry></feed>
+<div class="page__footer-copyright">&copy; 2023 laegel. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'laegel123/blog');
+    script.setAttribute('issue-term', 'pathname');
+    
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>
