@@ -90,13 +90,14 @@ body {
   h2 {
     padding-top:2em;
     padding-bottom: 0.5em;
-    border-bottom: 1px solid #D68AFF;
+    border-bottom: 3px solid #D68AFF;
   }
 
 	h1, h2, h3, h4, h5, h6 {
 		.header-link {
+            padding-top:2em;
 			position: relative;
-			left: 0.5em;
+			left: 0.5em;`
 			opacity: 0;
 			font-size: 0.8em;
 			-webkit-transition: opacity 0.2s ease-in-out 0.1s;
@@ -109,6 +110,11 @@ body {
 			opacity: 1;
 		}
 	}
+
+  // 추가
+  h3 {
+    padding-top: 1.5em;
+  }
 
   p,
   li,

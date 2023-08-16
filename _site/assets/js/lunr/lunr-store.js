@@ -1,6 +1,6 @@
 var store = [{
         "title": "[Spring Security] Spring Security 란 ?",
-        "excerpt":"이건 테스트입니다 하하하하하   TestTest   맨 위로 이동하기  ","categories": ["Spring Security"],
+        "excerpt":"Spring Security 란 ? Spring Security 란 Spring 기반의 애플리케이션 보안(인증과 권한, 인가 등) 을 담당해 관련 설정을 쉽게 할 수 있게 도와주는 스프링의 하위 프레임워크이다. Spring Security 는 ‘인증’ 과 ‘권한’ 에 대한 부분을 “Filter“의 흐름 에 따라 처리하고 있다. 인증(Authentication): 해당 사용자가 본인이 맞는지를 확인하는 절차 인가(Authorization): 인증된...","categories": ["Spring Security"],
         "tags": ["Spring Security"],
         "url": "/spring%20security/ch0/",
         "teaser": null

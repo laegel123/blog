@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-08-16T10:02:41+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">diary</title><subtitle>devlogs</subtitle><author><name>laegel</name></author><entry><title type="html">[Java] 리플렉션(Reflection) 알아보기</title><link href="http://localhost:4000/reflection/ch0/" rel="alternate" type="text/html" title="[Java] 리플렉션(Reflection) 알아보기" /><published>2023-08-08T00:00:00+09:00</published><updated>2023-08-08T00:00:00+09:00</updated><id>http://localhost:4000/reflection/ch0</id><content type="html" xml:base="http://localhost:4000/reflection/ch0/"><![CDATA[<h2 id="리플렉션reflection-이란-">리플렉션(Reflection) 이란 ?</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-08-16T14:16:43+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">diary</title><subtitle>devlogs</subtitle><author><name>laegel</name></author><entry><title type="html">[Java] 리플렉션(Reflection) 알아보기</title><link href="http://localhost:4000/reflection/ch0/" rel="alternate" type="text/html" title="[Java] 리플렉션(Reflection) 알아보기" /><published>2023-08-08T00:00:00+09:00</published><updated>2023-08-08T00:00:00+09:00</updated><id>http://localhost:4000/reflection/ch0</id><content type="html" xml:base="http://localhost:4000/reflection/ch0/"><![CDATA[<h2 id="리플렉션reflection-이란-">리플렉션(Reflection) 이란 ?</h2>
 <p><code class="language-plaintext highlighter-rouge">리플렉션</code> 은 구체적인 클래스 타입을 알지 못하더라도 그 클래스의 메서드, 타입, 변수들에 접근할 수 있도록 도와주는 자바 API를 말한다. 이 프로그래밍 기법은 런타임 시점에 동적으로 특정 클래스의 정보를 추출할 수 있게 도와줘 프로그램에 유연성을 
 더해준다. 다만, 런타임 시점에 인스턴스를 생성하기 때문에 구체적인 동작 흐름을 파악하기 어려울 수 있다.</p>
 
@@ -850,8 +850,157 @@ Yong 영역에서 일어나는 GC 를 <code class="language-plaintext highlighte
 
 <p>초기화 과정까지 거쳐 클래스 탑재 과정이 끝나게 된다면 본격적으로 JVM 에서 클래스 파일을 구동시킬 준비가 끝나게 된다.</p>
 
-<p><a href="#" class="btn btn--primary align-right">맨 위로 이동하기</a></p>]]></content><author><name>laegel</name></author><category term="JVM" /><category term="Java" /><category term="JVM" /><summary type="html"><![CDATA[JVM 은 사용자 컴퓨터 운영체제에 맞는 JRE 에 포함되어 있는 소프트웨어로, 바이트 코드로 변환된 자바 코드를 실행시켜주는 역할을 한다. 또한 자바 프로그램을 실행함에 있어 .class 파일에 대한 유효성 검사와 메모리 관리, GC 등의 작업을 수행하기 때문에 매우 중요한 소프트웨어라고 할 수 있다.]]></summary></entry><entry><title type="html">[Spring Security] Spring Security 란 ?</title><link href="http://localhost:4000/spring%20security/ch0/" rel="alternate" type="text/html" title="[Spring Security] Spring Security 란 ?" /><published>2023-07-23T00:00:00+09:00</published><updated>2023-07-23T00:00:00+09:00</updated><id>http://localhost:4000/spring%20security/ch0</id><content type="html" xml:base="http://localhost:4000/spring%20security/ch0/"><![CDATA[<p>이건 테스트입니다 하하하하하</p>
+<p><a href="#" class="btn btn--primary align-right">맨 위로 이동하기</a></p>]]></content><author><name>laegel</name></author><category term="JVM" /><category term="Java" /><category term="JVM" /><summary type="html"><![CDATA[JVM 은 사용자 컴퓨터 운영체제에 맞는 JRE 에 포함되어 있는 소프트웨어로, 바이트 코드로 변환된 자바 코드를 실행시켜주는 역할을 한다. 또한 자바 프로그램을 실행함에 있어 .class 파일에 대한 유효성 검사와 메모리 관리, GC 등의 작업을 수행하기 때문에 매우 중요한 소프트웨어라고 할 수 있다.]]></summary></entry><entry><title type="html">[Spring Security] Spring Security 란 ?</title><link href="http://localhost:4000/spring%20security/ch0/" rel="alternate" type="text/html" title="[Spring Security] Spring Security 란 ?" /><published>2023-07-23T00:00:00+09:00</published><updated>2023-07-23T00:00:00+09:00</updated><id>http://localhost:4000/spring%20security/ch0</id><content type="html" xml:base="http://localhost:4000/spring%20security/ch0/"><![CDATA[<h2 id="spring-security-란-">Spring Security 란 ?</h2>
+<p><code class="language-plaintext highlighter-rouge">Spring Security</code> 란 Spring 기반의 애플리케이션 보안(인증과 권한, 인가 등) 을 담당해 관련 설정을 쉽게 할 수 있게 도와주는 스프링의 하위 프레임워크이다.<br />
+<code class="language-plaintext highlighter-rouge">Spring Security</code> 는 ‘인증’ 과 ‘권한’ 에 대한 부분을 “<em>Filter</em>“의 흐름 에 따라 처리하고 있다.</p>
+<ul>
+  <li>인증(Authentication): 해당 사용자가 본인이 맞는지를 확인하는 절차</li>
+  <li>인가(Authorization): 인증된 사용자가 요청한 자원에 접근 가능한지를 결정하는 절차</li>
+</ul>
 
-<p>TestTest</p>
+<h2 id="전체적인-동작-흐름">전체적인 동작 흐름</h2>
+<p><img src="../../assets/img/spring/security01.png" /></p>
 
-<p><a href="#" class="btn btn--primary align-right">맨 위로 이동하기</a></p>]]></content><author><name>laegel</name></author><category term="Spring Security" /><category term="Spring Security" /><summary type="html"><![CDATA[이건 테스트입니다 하하하하하]]></summary></entry></feed>
+<ol>
+  <li>사용자가 로그인 정보와 함께 인증을 요청한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">AuthenticationFilter</code> 가 요청을 가로챈다. 이 때 가로챈 정보를 통해 <code class="language-plaintext highlighter-rouge">UsernamePasswordAuthenticationToken</code> 객체를 생성한다. (사용자가 입력한 데이터를 기반으로 생성한 객체로, 현 상태는 미검증 상태)</li>
+  <li><code class="language-plaintext highlighter-rouge">ProviderManager</code> 에게 토큰 객체를 전달한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">AuthenticationProvider</code> 에게 토큰 객체를 전달한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">UserDetailsService</code> 에게 사용자 정보를 넘겨준다.</li>
+  <li><code class="language-plaintext highlighter-rouge">UserDetailsService</code> 는 실제 넘겨받은 정보를 통해 DB 로부터 사용자 인증 정보를 가져오고 <code class="language-plaintext highlighter-rouge">UserDetails</code> 객체를 생성한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">AuthenticationProvider</code> 는 <code class="language-plaintext highlighter-rouge">UserDetails</code> 객체를 넘겨받고 사용자 정보를 비교하여 인증 여부를 판단한다.</li>
+  <li>인증이 성공적으로 완료되면, 사용자 정보를 담은 <code class="language-plaintext highlighter-rouge">Authentication</code> 객체를 반환한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">AuthenticationFilter</code> 에 <code class="language-plaintext highlighter-rouge">Authentication</code> 객체를 반환한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">Authentication</code> 객체를 <code class="language-plaintext highlighter-rouge">SecurityContext</code> 에 저장한다.</li>
+</ol>
+
+<p>이 과정 중 Spring Security 커스터마이징을 위해 주의깊게 살펴봐야 할 부분은 <code class="language-plaintext highlighter-rouge">UserDetailsService</code> 와 <code class="language-plaintext highlighter-rouge">UserDetails</code> 이다.<br />
+<code class="language-plaintext highlighter-rouge">UserDetailsService</code> 는 <em>loadUserByUsername()</em> 이라는 메서드를 통해 <code class="language-plaintext highlighter-rouge">UserDetails</code> 객체를 반환한다. 반환되는 <code class="language-plaintext highlighter-rouge">UserDetails</code> 를 사용자 입력 정보와 비교함으로써 실질적인 인증 여부가 결정되기 때문에, 이 두 서비스를 어떻게 구현하느냐에 따라
+인증의 세부 과정이 달라지게 된다.</p>
+
+<h2 id="spring-security-모듈">Spring Security 모듈</h2>
+
+<h3 id="authentication">Authentication</h3>
+<p><code class="language-plaintext highlighter-rouge">Authentication</code> 은 현재 접근하는 주체의 정보와 권한을 담는 인터페이스이다. Spring Security 는 사용자 정보 및 인증 성공여부를 가지고 <em>Authentication</em> 객체를 생성하여 <code class="language-plaintext highlighter-rouge">SecurityContext</code> 라는 보관소에 저장한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Authentication</code> 는 다음과 같은 기능을 제공한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Authentication</span> <span class="kd">extends</span> <span class="nc">Principal</span><span class="o">,</span> <span class="nc">Serializable</span> <span class="o">{</span>
+
+	<span class="c1">// 현재 사용자의 권한 목록을 가져옴</span>
+	<span class="nc">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">GrantedAuthority</span><span class="o">&gt;</span> <span class="nf">getAuthorities</span><span class="o">();</span>
+
+	<span class="c1">// credentials 를 가져옴 (주로 비밀번호)</span>
+	<span class="nc">Object</span> <span class="nf">getCredentials</span><span class="o">();</span>
+
+	<span class="nc">Object</span> <span class="nf">getDetails</span><span class="o">();</span>
+
+	<span class="nc">Object</span> <span class="nf">getPrincipal</span><span class="o">();</span>
+
+	<span class="c1">// 인증 여부를 가져옴</span>
+	<span class="kt">boolean</span> <span class="nf">isAuthenticated</span><span class="o">();</span>
+
+	<span class="kt">void</span> <span class="nf">setAuthenticated</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">isAuthenticated</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IllegalArgumentException</span><span class="o">;</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="securitycontextholder">SecurityContextHolder</h3>
+<p><img src="../../assets/img/spring/security02.png" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">SecurityContextHolder</code> 는 인증된 사용자 정보(principal)를 담고 있는 <code class="language-plaintext highlighter-rouge">Authentication</code> 객체의 보관소인 <code class="language-plaintext highlighter-rouge">SecurityContext</code> 를 관리하는 객체이다.<br />
+<code class="language-plaintext highlighter-rouge">SecurityContextHolder</code> 의 기본적인 <code class="language-plaintext highlighter-rouge">SecurityContext</code> 객체 저장 방식은 <em>ThreadLocal</em> 로 쓰레드 별로 객체를 저장하고 관리한다. 따라서 멀티 쓰레드 시스템을 사용할 경우 <code class="language-plaintext highlighter-rouge">SecurityContextHolderStategy</code> 인터페이스 구현체를 이용하여 
+객체 저장 전략을 변경하여야 한다.</p>
+
+<h3 id="usernamepasswordauthenticationtoken">UsernamePasswordAuthenticationToken</h3>
+<p><code class="language-plaintext highlighter-rouge">UsernamePasswordAuthenticationToken</code> 토큰은 <em>Authentication</em> 을 구현한 <code class="language-plaintext highlighter-rouge">AbstractAuthenticationToken</code> 의 하위 클래스로 주로 UserId 가 Principal 역할을, Password가 Credential 역할을 담당한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">UsernamePasswordAuthenticationToken</span> <span class="kd">extends</span> <span class="nc">AbstractAuthenticationToken</span> <span class="o">{</span>
+    <span class="c1">// 주로 사용자의 ID에 해당함</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">Object</span> <span class="n">principal</span><span class="o">;</span>
+    <span class="c1">// 주로 사용자의 PW에 해당함</span>
+    <span class="kd">private</span> <span class="nc">Object</span> <span class="n">credentials</span><span class="o">;</span>
+    
+    <span class="c1">// 인증 완료 전의 객체 생성</span>
+    <span class="kd">public</span> <span class="nf">UsernamePasswordAuthenticationToken</span><span class="o">(</span><span class="nc">Object</span> <span class="n">principal</span><span class="o">,</span> <span class="nc">Object</span> <span class="n">credentials</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kd">super</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">principal</span> <span class="o">=</span> <span class="n">principal</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">credentials</span> <span class="o">=</span> <span class="n">credentials</span><span class="o">;</span>
+		<span class="n">setAuthenticated</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+	<span class="o">}</span>
+    
+    <span class="c1">// 인증 완료 후의 객체 생성</span>
+    <span class="kd">public</span> <span class="nf">UsernamePasswordAuthenticationToken</span><span class="o">(</span><span class="nc">Object</span> <span class="n">principal</span><span class="o">,</span> <span class="nc">Object</span> <span class="n">credentials</span><span class="o">,</span>
+			<span class="nc">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">GrantedAuthority</span><span class="o">&gt;</span> <span class="n">authorities</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kd">super</span><span class="o">(</span><span class="n">authorities</span><span class="o">);</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">principal</span> <span class="o">=</span> <span class="n">principal</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">credentials</span> <span class="o">=</span> <span class="n">credentials</span><span class="o">;</span>
+		<span class="kd">super</span><span class="o">.</span><span class="na">setAuthenticated</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span> <span class="c1">// must use super, as we override</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">AbstractAuthenticationToken</span> <span class="kd">implements</span> <span class="nc">Authentication</span><span class="o">,</span> <span class="nc">CredentialsContainer</span> <span class="o">{</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">UsernamePasswordAuthenticationToken</code> 클래스를 구성하고 있는 코드를 보면 두 개의 생성자를 통해 인증 여부를 담고있는 객체를 반환하고 있음을 알 수 있다.</p>
+
+<h3 id="authenticationprovider">AuthenticationProvider</h3>
+<p><code class="language-plaintext highlighter-rouge">AuthenticationProvider</code> 는 실제 인증에 대한 부분을 처리한다. 인증 전의 <code class="language-plaintext highlighter-rouge">Authentication</code> 객체를 받아서 인증이 완료된 객체를 반환하는 역할을 한다.</p>
+
+<h3 id="authenticationmanager">AuthenticationManager</h3>
+<p><code class="language-plaintext highlighter-rouge">AuthenticationManager</code> 인터페이스는 인증이 성공했을 시 사용자 정보를 담은 Authentication 객체를 반환해 <em>SecurityContext</em> 에 저장한다. 그리고 인증 상태를 유지하기 위해 세션에 보관하며, 인증이 실패한 경우 <em>AuthenticationException</em> 을 발생시킨다.</p>
+
+<h3 id="userdetails">UserDetails</h3>
+<p><em>UserDetailService</em> 인터페이스에 의해 <code class="language-plaintext highlighter-rouge">UserDetails</code> 객체가 생성되며, 이 객체는 <em>AuthenticationProvider</em> 에 의해 인증 과정이 실행된다.<br />
+인터페이스를 살펴 보면 아래와 같이 인증된 정보를 반환하는 메서드를 가지고 있음을 알 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">UserDetails</span> <span class="kd">extends</span> <span class="nc">Serializable</span> <span class="o">{</span>
+
+    <span class="nc">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">GrantedAuthority</span><span class="o">&gt;</span> <span class="nf">getAuthorities</span><span class="o">();</span>
+
+    <span class="nc">String</span> <span class="nf">getPassword</span><span class="o">();</span>
+
+    <span class="nc">String</span> <span class="nf">getUsername</span><span class="o">();</span>
+
+    <span class="kt">boolean</span> <span class="nf">isAccountNonExpired</span><span class="o">();</span>
+
+    <span class="kt">boolean</span> <span class="nf">isAccountNonLocked</span><span class="o">();</span>
+
+    <span class="kt">boolean</span> <span class="nf">isCredentialsNonExpired</span><span class="o">();</span>
+
+    <span class="kt">boolean</span> <span class="nf">isEnabled</span><span class="o">();</span>
+    
+<span class="o">}</span>
+</code></pre></div></div>
+<h3 id="userdetailsservice">UserDetailsService</h3>
+
+<p><code class="language-plaintext highlighter-rouge">UserDetailsService</code> 인터페이스는 <em>UserDetails</em> 객체를 반환하는 단 하나의 메서드를 가지고 있는데, 일반적으로 이를 구현한 클래스 내부에 <em>UserRepository</em> 를 주입받아 DB 와 연결해 인증 처리한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">UserDetailsService</span> <span class="o">{</span>
+
+    <span class="nc">UserDetails</span> <span class="nf">loadUserByUsername</span><span class="o">(</span><span class="nc">String</span> <span class="n">var1</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">UsernameNotFoundException</span><span class="o">;</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="password-encoding">Password Encoding</h3>
+<p><em>AuthenticationManagerBuilder.userDetailsService().passwordEncoder()</em> 를 통해 패스워드 암호화에 사용될 <em>PasswordEncoder</em> 구현체를 지정할 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">AuthenticationManagerBuilder</span> <span class="n">auth</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+	<span class="c1">// TODO Auto-generated method stub</span>
+	<span class="n">auth</span><span class="o">.</span><span class="na">userDetailsService</span><span class="o">(</span><span class="n">userDetailsService</span><span class="o">).</span><span class="na">passwordEncoder</span><span class="o">(</span><span class="n">passwordEncoder</span><span class="o">());</span>
+<span class="o">}</span>
+
+<span class="nd">@Bean</span>
+<span class="kd">public</span> <span class="nc">PasswordEncoder</span> <span class="nf">passwordEncoder</span><span class="o">(){</span>
+	<span class="k">return</span> <span class="k">new</span> <span class="nf">BCryptPasswordEncoder</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="grantedauthority">GrantedAuthority</h3>
+<p><code class="language-plaintext highlighter-rouge">GrantedAuthority</code> 객체는 현재 사용자(Principal) 가 가지고 있는 권한을 의미한다. ROLE_ADMIN, ROLE_USER 와 같이 ROLE_* 의 형태로 사용하며, 보통 “roles” 라고 한다.<br />
+이 객체는 <em>UserDetailsService</em> 에 의해 불러올 수 있고, 특정 자원에 대한 권한이 있는지를 검사하여 접근 허용 여부를 결정한다.</p>
+
+<p><a href="#" class="btn btn--primary align-right">맨 위로 이동하기</a></p>]]></content><author><name>laegel</name></author><category term="Spring Security" /><category term="Spring Security" /><summary type="html"><![CDATA[Spring Security 란 ? Spring Security 란 Spring 기반의 애플리케이션 보안(인증과 권한, 인가 등) 을 담당해 관련 설정을 쉽게 할 수 있게 도와주는 스프링의 하위 프레임워크이다. Spring Security 는 ‘인증’ 과 ‘권한’ 에 대한 부분을 “Filter“의 흐름 에 따라 처리하고 있다. 인증(Authentication): 해당 사용자가 본인이 맞는지를 확인하는 절차 인가(Authorization): 인증된 사용자가 요청한 자원에 접근 가능한지를 결정하는 절차]]></summary></entry></feed>
