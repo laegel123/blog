@@ -93,11 +93,17 @@ body {
     border-bottom: 3px solid #D68AFF;
   }
 
+  // 추가
+  h3 {
+    padding-top: 1.5em;
+    font-weight: bolder;
+  }
+
 	h1, h2, h3, h4, h5, h6 {
 		.header-link {
             padding-top:2em;
 			position: relative;
-			left: 0.5em;`
+			left: 0.5em;
 			opacity: 0;
 			font-size: 0.8em;
 			-webkit-transition: opacity 0.2s ease-in-out 0.1s;
@@ -110,11 +116,6 @@ body {
 			opacity: 1;
 		}
 	}
-
-  // 추가
-  h3 {
-    padding-top: 1.5em;
-  }
 
   p,
   li,
