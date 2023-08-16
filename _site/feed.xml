@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-08-16T14:23:34+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">diary</title><subtitle>devlogs</subtitle><author><name>laegel</name></author><entry><title type="html">[Java] 리플렉션(Reflection) 알아보기</title><link href="http://localhost:4000/reflection/ch0/" rel="alternate" type="text/html" title="[Java] 리플렉션(Reflection) 알아보기" /><published>2023-08-08T00:00:00+09:00</published><updated>2023-08-08T00:00:00+09:00</updated><id>http://localhost:4000/reflection/ch0</id><content type="html" xml:base="http://localhost:4000/reflection/ch0/"><![CDATA[<h2 id="리플렉션reflection-이란-">리플렉션(Reflection) 이란 ?</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-08-16T14:45:45+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">diary</title><subtitle>devlogs</subtitle><author><name>laegel</name></author><entry><title type="html">[Java] 리플렉션(Reflection) 알아보기</title><link href="http://localhost:4000/reflection/ch0/" rel="alternate" type="text/html" title="[Java] 리플렉션(Reflection) 알아보기" /><published>2023-08-08T00:00:00+09:00</published><updated>2023-08-08T00:00:00+09:00</updated><id>http://localhost:4000/reflection/ch0</id><content type="html" xml:base="http://localhost:4000/reflection/ch0/"><![CDATA[<h2 id="리플렉션reflection-이란-">리플렉션(Reflection) 이란 ?</h2>
 <p><code class="language-plaintext highlighter-rouge">리플렉션</code> 은 구체적인 클래스 타입을 알지 못하더라도 그 클래스의 메서드, 타입, 변수들에 접근할 수 있도록 도와주는 자바 API를 말한다. 이 프로그래밍 기법은 런타임 시점에 동적으로 특정 클래스의 정보를 추출할 수 있게 도와줘 프로그램에 유연성을 
 더해준다. 다만, 런타임 시점에 인스턴스를 생성하기 때문에 구체적인 동작 흐름을 파악하기 어려울 수 있다.</p>
 
@@ -16,8 +16,6 @@
 스프링에 등록된 Bean 은 애플리케이션이 실행된 후 런타임 시점에 객체가 호출될 때 동적으로 객체의 인스턴스를 생성하는데 이 때 리플렉션 API 를 사용해 해결한다.</p>
 
 <p><a href="#" class="btn btn--primary align-right">맨 위로 이동하기</a></p>]]></content><author><name>laegel</name></author><category term="Reflection" /><category term="Java" /><category term="Reflection" /><summary type="html"><![CDATA[리플렉션(Reflection) 이란 ? 리플렉션 은 구체적인 클래스 타입을 알지 못하더라도 그 클래스의 메서드, 타입, 변수들에 접근할 수 있도록 도와주는 자바 API를 말한다. 이 프로그래밍 기법은 런타임 시점에 동적으로 특정 클래스의 정보를 추출할 수 있게 도와줘 프로그램에 유연성을 더해준다. 다만, 런타임 시점에 인스턴스를 생성하기 때문에 구체적인 동작 흐름을 파악하기 어려울 수 있다.]]></summary></entry><entry><title type="html">[Spring Security] Spring Security + JWT 구현</title><link href="http://localhost:4000/spring%20security/ch1/" rel="alternate" type="text/html" title="[Spring Security] Spring Security + JWT 구현" /><published>2023-08-08T00:00:00+09:00</published><updated>2023-08-08T00:00:00+09:00</updated><id>http://localhost:4000/spring%20security/ch1</id><content type="html" xml:base="http://localhost:4000/spring%20security/ch1/"><![CDATA[<p>개인 프로젝트 진행을 위해 세팅한 환경 일부를 기록한 글이다.</p>
-
-<hr />
 
 <h2 id="jwtjson-web-token-란-">JWT(JSON Web Token) 란 ?</h2>
 <p><code class="language-plaintext highlighter-rouge">JWT</code> 란 JSON 객체를 사용해서 토큰 자체에 정보를 저장하는 Web Token 이다. Header, Payload, Signature 3 개의 부분으로 구성되어 있으며, 쿠키나 세션을 이용한 인증보다 안전하고 효율적이다. 다만, 서버에서 관리하지 않다보니 탈취당한 경우 대처가 
@@ -121,8 +119,6 @@ compileQuerydsl.doFirst {
 }
 
 </code></pre></div></div>
-
-<hr />
 
 <h2 id="tokenprovider">TokenProvider</h2>
 
@@ -738,7 +734,7 @@ Yong 영역에서 일어나는 GC 를 <code class="language-plaintext highlighte
 각 지역들을 역할과 함께 논리적으로 구분하여 객체를 할당하는 방식이다.<br />
  <code class="language-plaintext highlighter-rouge">G1GC</code>에서는 기존 Eden, Survivor, Old 역할에 더해 Humongous 와 Available/Unused 라는 두 가지 역할이 추가되었다.</p>
 <ul>
-  <li>Humongous: region 크기가 50%를 초과하는 객체를 저장하는 region 을 의미gksek.</li>
+  <li>Humongous: region 크기가 50%를 초과하는 객체를 저장하는 region 을 의미한다.</li>
   <li>Available/Unused: 사용되지 않는 region을 의미한다.</li>
 </ul>
 
