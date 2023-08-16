@@ -485,8 +485,9 @@ Yong 영역에서 일어나는 GC 를 <code class="language-plaintext highlighte
   <li>Available/Unused: 사용되지 않는 region을 의미한다.</li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">G1GC</code>의 핵심은 Heap 을 동일한 크기의 region 으로 나누고, 새로 추가된 역할을 참고하여 가비지가 많은 region 을 우선적으로 GC 작업을 수행하는 것이다.
- <img src="../../assets/img/java/jvm10.png" /></p>
+<p><code class="language-plaintext highlighter-rouge">G1GC</code>의 핵심은 Heap 을 동일한 크기의 region 으로 나누고, 새로 추가된 역할을 참고하여 가비지가 많은 region 을 우선적으로 GC 작업을 수행하는 것이다.</p>
+
+<p><img src="../../assets/img/java/jvm10.png" /></p>
 
 <h5 id="minor-gc-1">Minor GC</h5>
 <p>Eden 지역에서 GC가 수행되면 살아남은 객체를 Mark(식별) 하고, 메모리를 Sweep(회수) 한다. 그리고 이 객체들을 다른 지역으로 이동시키게 된다. 복제되는 지역이 Available/Unused 지역이면 해당 지역은 Survivor 영역이 되고, Eden 영역이면 
